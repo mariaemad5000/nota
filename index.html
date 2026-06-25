@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>نوتة البستاني الصغير</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-height:100vh;padding:16px;direction:rtl;}
+
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:90vh;}
+.login-card{background:#fff;border-radius:24px;border:2.5px solid #a5d6a7;padding:36px 28px;text-align:center;max-width:340px;width:100%;box-shadow:0 6px 20px rgba(46,125,50,0.12);}
+.login-plant{font-size:72px;margin-bottom:8px;display:block;}
+.login-title{font-size:22px;font-weight:700;color:#1b5e20;margin-bottom:6px;}
+.login-sub{font-size:13px;color:#558b2f;margin-bottom:24px;line-height:1.5;}
+.login-input-wrap{position:relative;margin-bottom:12px;}
+.login-input-wrap input{width:100%;padding:13px 16px;border:2px solid #c5e1a5;border-radius:12px;font-size:15px;font-family:inherit;text-align:center;letter-spacing:1px;outline:none;transition:border .2s;background:#f9fbe7;}
+.login-input-wrap input:focus{border-color:#2e7d32;}
+.login-label{font-size:12px;color:#558b2f;font-weight:700;margin-bottom:6px;text-align:right;}
+.login-btn{width:100%;background:#2e7d32;color:#fff;border:none;padding:13px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;}
+.login-btn:hover{background:#43a047;}
+.login-error{color:#c62828;font-size:12px;margin-top:8px;min-height:18px;font-weight:600;}
+.login-hint{font-size:11px;color:#aaa;margin-top:14px;}
+.login-loading{font-size:12px;color:#558b2f;margin-top:8px;min-height:18px;font-weight:600;}
+
+#appScreen{display:none;}
+.greeting-bar{background:#e8f5e9;border:2px solid #a5d6a7;border-radius:14px;padding:10px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.greeting-bar .gtxt{font-size:14px;font-weight:700;color:#1b5e20;}
+.greeting-bar .gtxt span{color:#2e7d32;}
+.logout-link{font-size:11px;color:#888;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;}
+
+.week-header{background:#2e7d32;border-radius:18px;padding:14px 18px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 12px rgba(46,125,50,0.25);}
+.week-header .winfo{text-align:center;}
+.week-header .winfo h2{color:#fff;font-size:18px;font-weight:700;margin-bottom:2px;}
+.week-header .winfo span{color:#a5d6a7;font-size:12px;}
+.nav-btn{background:rgba(255,255,255,0.18);border:none;color:#fff;border-radius:10px;width:42px;height:42px;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.nav-btn:hover{background:rgba(255,255,255,0.32);}
+.nav-btn:disabled{opacity:0.3;cursor:default;}
+
+.week-strip{display:flex;gap:8px;margin-bottom:14px;}
+.wdot{flex:1;height:62px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border:2.5px solid transparent;transition:all .2s;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+.wdot:hover{border-color:#81c784;}
+.wdot.active{border-color:#2e7d32;background:#e8f5e9;}
+.wdot.completed{background:#c8e6c9;border-color:#66bb6a;}
+.wdot .wd-emoji{font-size:22px;line-height:1;}
+.wdot .wd-lbl{font-size:10px;font-weight:700;color:#2e7d32;margin-top:3px;}
+
+.main-card{background:#fff;border-radius:18px;border:2.5px solid #a5d6a7;padding:16px;display:flex;gap:16px;box-shadow:0 4px 16px rgba(46,125,50,0.1);}
+.plant-area{flex:0 0 210px;background:linear-gradient(180deg,#f1f8e9 60%,#e8f5e9 100%);border-radius:14px;border:2px dashed #81c784;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:12px 10px 14px;min-height:300px;position:relative;}
+.stage-badge{background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#2e7d32;margin-bottom:6px;text-align:center;}
+.tasks-area{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0;}
+.tasks-header{display:flex;justify-content:space-between;align-items:center;}
+.tasks-title{font-size:15px;font-weight:700;color:#1b5e20;}
+.score-badge{background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;color:#2e7d32;}
+
+.day-nav{display:flex;align-items:center;gap:6px;}
+.day-nav-label{font-size:11px;font-weight:700;color:#558b2f;flex:0 0 auto;white-space:nowrap;}
+.day-strip{display:flex;gap:4px;flex:1;overflow-x:auto;}
+.day-pill{flex:1;text-align:center;padding:7px 4px;border-radius:9px;font-size:11px;font-weight:700;background:#f9fbe7;border:1.5px solid #c5e1a5;color:#789;cursor:pointer;transition:all .15s;min-width:34px;}
+.day-pill:hover{border-color:#81c784;}
+.day-pill.active{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+.day-pill.full{background:#c8e6c9;border-color:#66bb6a;color:#1b5e20;}
+.day-pill.active.full{background:#2e7d32;color:#fff;}
+
+.section-label{font-size:11px;font-weight:700;color:#789;margin-top:2px;display:flex;align-items:center;gap:6px;}
+.section-label::after{content:'';flex:1;height:1px;background:#e0e8d8;}
+
+.tasks-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.task-item{background:#f9fbe7;border:2px solid #c5e1a5;border-radius:12px;padding:9px 11px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s;position:relative;overflow:visible;}
+.task-item:hover:not(.done){transform:translateY(-2px);box-shadow:0 4px 12px rgba(76,175,80,0.2);}
+.task-item.done{background:#e8f5e9;border-color:#66bb6a;cursor:default;}
+.task-item.weekly-item{border-style:dashed;}
+.weekly-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.thorn-wrap{position:absolute;top:-14px;right:10px;pointer-events:none;z-index:10;transition:all .45s cubic-bezier(.34,1.56,.64,1);}
+.thorn-wrap.removed{opacity:0;transform:scale(0) translateY(-16px);}
+.thorn-wrap svg{width:28px;height:28px;}
+.task-check{width:24px;height:24px;border:2.5px solid #81c784;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .3s;margin-right:auto;}
+.task-item.done .task-check{background:#43a047;border-color:#43a047;}
+.check-inner{width:10px;height:10px;background:white;border-radius:50%;opacity:0;transition:opacity .2s;}
+.task-item.done .check-inner{opacity:1;}
+.task-emoji{font-size:22px;flex-shrink:0;}
+.task-info .t-name{font-size:13px;font-weight:700;color:#1b5e20;}
+.task-info .t-desc{font-size:10px;color:#558b2f;margin-top:2px;line-height:1.3;}
+.prog-row{display:flex;align-items:center;gap:10px;}
+.prog-track{flex:1;height:10px;background:#c8e6c9;border-radius:10px;overflow:hidden;}
+.prog-fill{height:100%;background:#43a047;border-radius:10px;transition:width .5s ease;}
+.prog-num{font-size:13px;font-weight:700;color:#2e7d32;min-width:28px;}
+.verse{background:#fffde7;border-radius:10px;padding:8px 12px;font-size:12px;color:#e65100;text-align:center;border:1.5px solid #fff176;font-style:italic;}
+.week-complete-banner{display:none;background:linear-gradient(135deg,#2e7d32,#66bb6a);border-radius:14px;padding:14px 18px;text-align:center;margin-bottom:14px;}
+.week-complete-banner.show{display:block;}
+.week-complete-banner p{color:#fff;font-size:15px;font-weight:700;}
+.week-complete-banner span{color:#c8e6c9;font-size:12px;}
+
+/* Dashboard */
+#dashScreen{display:none;max-width:760px;margin:0 auto;}
+.dash-header{background:linear-gradient(135deg,#1b5e20,#2e7d32);border-radius:20px;padding:20px 22px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 16px rgba(27,94,32,0.3);}
+.dash-header .htxt h1{color:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.dash-header .htxt p{color:#a5d6a7;font-size:12px;margin-top:4px;}
+.dash-refresh{background:rgba(255,255,255,0.18);border:none;color:#fff;border-radius:12px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:background .2s;}
+.dash-refresh:hover{background:rgba(255,255,255,0.32);}
+@keyframes spinAnim{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.dash-refresh.spin .spin-ic{display:inline-block;animation:spinAnim .7s linear infinite;}
+
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.dash-stat{background:#fff;border:2px solid #a5d6a7;border-radius:16px;padding:14px 8px;text-align:center;box-shadow:0 2px 8px rgba(46,125,50,0.06);}
+.dash-stat .ic{font-size:18px;margin-bottom:2px;}
+.dash-stat .num{font-size:22px;font-weight:700;color:#2e7d32;}
+.dash-stat .lbl{font-size:10.5px;color:#558b2f;font-weight:600;margin-top:2px;line-height:1.3;}
+
+.dash-toolbar{display:flex;gap:8px;margin-bottom:14px;}
+.dash-search{flex:1;position:relative;}
+.dash-search input{width:100%;padding:10px 14px 10px 36px;border:2px solid #c5e1a5;border-radius:12px;font-size:13px;font-family:inherit;background:#fff;outline:none;transition:border .2s;}
+.dash-search input:focus{border-color:#2e7d32;}
+.dash-search .sic{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:#9ab;}
+.dash-sort{display:flex;gap:6px;}
+.sort-btn{background:#fff;border:2px solid #c5e1a5;color:#558b2f;border-radius:12px;padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s;}
+.sort-btn.active{background:#2e7d32;border-color:#2e7d32;color:#fff;}
+
+.dash-empty{background:#fff;border:2px dashed #a5d6a7;border-radius:18px;padding:40px 20px;text-align:center;color:#789;font-size:13px;line-height:1.6;}
+.dash-empty .eemoji{font-size:40px;display:block;margin-bottom:10px;}
+
+.dash-list{display:flex;flex-direction:column;gap:10px;}
+.child-card{background:#fff;border:2px solid #a5d6a7;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(46,125,50,0.06);transition:box-shadow .2s;}
+.child-card.expanded{box-shadow:0 4px 16px rgba(46,125,50,0.15);}
+.child-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;}
+.child-avatar{flex:0 0 42px;height:42px;border-radius:50%;background:#e8f5e9;border:2px solid #a5d6a7;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#2e7d32;}
+.child-main{flex:1;min-width:0;}
+.child-name{font-size:14.5px;font-weight:700;color:#1b5e20;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.child-sub{font-size:11px;color:#888;margin-top:2px;}
+.child-weeks-mini{display:flex;gap:4px;flex:0 0 auto;}
+.wmini{width:26px;height:26px;border-radius:7px;background:#f0f0f0;color:#aaa;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.wmini.full{background:#66bb6a;color:#fff;}
+.wmini.partial{background:#ffd54f;color:#7a5b00;}
+.wmini.zero{background:#f0f0f0;color:#bbb;}
+.child-total-badge{flex:0 0 auto;background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:14px;padding:5px 10px;font-size:12px;font-weight:700;color:#2e7d32;white-space:nowrap;}
+.chev{flex:0 0 18px;font-size:14px;color:#9ab;transition:transform .2s;}
+.child-card.expanded .chev{transform:rotate(180deg);}
+
+.child-detail{display:none;padding:0 16px 16px;border-top:1.5px solid #e8f5e9;}
+.child-card.expanded .child-detail{display:block;}
+.detail-week-block{background:#f9fbe7;border:1.5px solid #e2eec0;border-radius:12px;padding:10px 12px;margin-top:10px;}
+.detail-week-title{font-size:12px;font-weight:700;color:#1b5e20;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
+.detail-week-title .dwscore{font-size:11px;color:#558b2f;font-weight:700;}
+.detail-tasks{display:flex;flex-wrap:wrap;gap:5px;}
+.dtask{font-size:10.5px;padding:4px 9px;border-radius:9px;background:#eee;color:#999;font-weight:600;}
+.dtask.done{background:#c8e6c9;color:#1b5e20;}
+.dtask.miss{background:#fde8e8;color:#a33;}
+
+.dash-back{margin-top:16px;text-align:center;}
+.dash-back button{background:none;border:none;color:#888;font-size:12px;text-decoration:underline;cursor:pointer;font-family:inherit;}
+.delete-btn{background:none;border:none;color:#e53935;font-size:18px;cursor:pointer;padding:4px 8px;border-radius:8px;transition:background .2s;flex-shrink:0;}
+.delete-btn:hover{background:#fde8e8;}
+.confirm-delete{display:none;background:#fff3f3;border:1.5px solid #ef9a9a;border-radius:10px;padding:8px 12px;margin:0 16px 12px;text-align:center;}
+.confirm-delete.show{display:block;}
+.confirm-delete p{font-size:12px;color:#c62828;font-weight:700;margin-bottom:8px;}
+.confirm-btns{display:flex;gap:8px;justify-content:center;}
+.confirm-yes{background:#e53935;color:#fff;border:none;border-radius:8px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+.confirm-no{background:#eee;color:#555;border:none;border-radius:8px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* Storage status indicator */
+.storage-status{font-size:10px;color:#888;text-align:center;padding:4px;margin-top:4px;}
+.storage-status.ok{color:#2e7d32;}
+.storage-status.err{color:#c62828;}
+
+/* ═══════════════ MOBILE RESPONSIVE ═══════════════ */
+@media (max-width: 600px) {
+  body{padding:10px;}
+
+  /* Login */
+  .login-card{padding:24px 16px;}
+  .login-plant{font-size:52px;}
+  .login-title{font-size:18px;}
+
+  /* Week header */
+  .week-header{padding:10px 12px;border-radius:14px;}
+  .week-header .winfo h2{font-size:15px;}
+  .week-header .winfo span{font-size:10px;}
+  .nav-btn{width:36px;height:36px;font-size:20px;}
+
+  /* Week strip */
+  .week-strip{gap:5px;}
+  .wdot{height:52px;}
+  .wdot .wd-emoji{font-size:18px;}
+  .wdot .wd-lbl{font-size:9px;}
+
+  /* Main card — stack vertically on mobile */
+  .main-card{flex-direction:column;padding:12px;gap:12px;}
+
+  /* Plant area — smaller on mobile */
+  .plant-area{flex:none;width:100%;min-height:180px;flex-direction:row;justify-content:center;align-items:center;gap:12px;padding:10px;}
+  .plant-area svg{width:100px;height:143px;}
+  .stage-badge{font-size:10px;padding:3px 8px;margin-bottom:0;}
+  #potLabel{font-size:10px;margin-top:0;}
+
+  /* Plant area column inside row layout */
+  .plant-area{flex-direction:column;}
+
+  /* Tasks */
+  .tasks-title{font-size:13px;}
+  .score-badge{font-size:11px;padding:3px 8px;}
+  .tasks-grid{grid-template-columns:1fr 1fr;gap:7px;}
+  .weekly-grid{grid-template-columns:1fr 1fr;gap:7px;}
+  .task-item{padding:8px 8px;}
+  .task-emoji{font-size:18px;}
+  .task-info .t-name{font-size:11px;}
+  .task-info .t-desc{font-size:9px;}
+  .task-check{width:20px;height:20px;}
+
+  /* Day strip */
+  .day-pill{font-size:9px;padding:5px 2px;min-width:28px;}
+
+  /* Section label */
+  .section-label{font-size:10px;}
+
+  /* Progress */
+  .prog-num{font-size:11px;}
+
+  /* Verse */
+  .verse{font-size:11px;}
+
+  /* Banner */
+  .week-complete-banner p{font-size:13px;}
+
+  /* Greeting bar */
+  .greeting-bar .gtxt{font-size:12px;}
+
+  /* Dashboard */
+  .dash-header{padding:14px 14px;border-radius:14px;flex-wrap:wrap;gap:10px;}
+  .dash-header .htxt h1{font-size:16px;}
+  .dash-stats{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .dash-stat .num{font-size:18px;}
+  .dash-stat .lbl{font-size:9.5px;}
+  .dash-toolbar{flex-direction:column;gap:8px;}
+  .dash-sort{flex-wrap:wrap;}
+  .sort-btn{font-size:11px;padding:7px 10px;}
+  .child-head{padding:10px 12px;gap:8px;}
+  .child-name{font-size:13px;}
+  .child-weeks-mini{display:none;}
+  .child-total-badge{font-size:11px;padding:4px 8px;}
+  .wmini{width:22px;height:22px;font-size:9px;}
+  .detail-tasks{gap:4px;}
+  .dtask{font-size:9.5px;padding:3px 7px;}
+}
+
+@media (max-width: 380px) {
+  .tasks-grid{grid-template-columns:1fr;}
+  .weekly-grid{grid-template-columns:1fr;}
+  .task-info .t-name{font-size:12px;}
+  .task-info .t-desc{font-size:10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="loginScreen">
+  <div class="login-card">
+    <span class="login-plant">🌱</span>
+    <div class="login-title">نوتة البستاني الصغير</div>
+    <div class="login-sub">اكتب اسمك والكود السري بتاعك عشان تدخل على زرعتك!</div>
+
+    <div class="login-label">اسمك 🌿</div>
+    <div class="login-input-wrap">
+      <input type="text" id="nameInput" placeholder="اكتب اسمك هنا..." autocomplete="off" autocorrect="off" spellcheck="false"/>
+    </div>
+
+    <div class="login-label">الكود السري 🔑</div>
+    <div class="login-input-wrap">
+      <input type="text" id="codeInput" placeholder="اكتب الكود هنا..." autocomplete="off" autocorrect="off" spellcheck="false"/>
+    </div>
+
+    <button class="login-btn" onclick="tryLogin()">ادخل 🌿</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-loading" id="loginLoading"></div>
+    <div class="login-hint">💡 الكود سري بينك وبين أهلك</div>
+  </div>
+</div>
+
+<!-- Servant Dashboard -->
+<div id="dashScreen" style="display:none;">
+  <div class="dash-header">
+    <div class="htxt">
+      <h1>📋 داشبورد الخادم</h1>
+      <p>متابعة الأطفال المسجلين وتقدمهم في النوتة</p>
+    </div>
+    <button class="dash-refresh" id="refreshBtn" onclick="loadDashboard()"><span class="spin-ic">🔄</span> تحديث</button>
+  </div>
+
+  <div class="dash-stats">
+    <div class="dash-stat"><div class="ic">🧒</div><div class="num" id="statTotal">٠</div><div class="lbl">طفل مسجل</div></div>
+    <div class="dash-stat"><div class="ic">✅</div><div class="num" id="statActive">٠</div><div class="lbl">عملوا مهمة على الأقل</div></div>
+    <div class="dash-stat"><div class="ic">🌹</div><div class="num" id="statFull">٠</div><div class="lbl">أكملوا كل الأسابيع</div></div>
+    <div class="dash-stat"><div class="ic">⭐</div><div class="num" id="statAvg">٠</div><div class="lbl">متوسط النقاط للطفل</div></div>
+  </div>
+
+  <div class="dash-toolbar">
+    <div class="dash-search">
+      <span class="sic">🔍</span>
+      <input type="text" id="dashSearch" placeholder="بحث باسم الطفل..." oninput="renderDashboard()"/>
+    </div>
+    <div class="dash-sort">
+      <button class="sort-btn active" id="sortTopBtn" onclick="setSort('top')">الأعلى نقاط</button>
+      <button class="sort-btn" id="sortNameBtn" onclick="setSort('name')">أبجدي</button>
+      <button class="sort-btn" id="sortNeedBtn" onclick="setSort('need')">يحتاجوا تشجيع</button>
+    </div>
+  </div>
+
+  <div id="dashContent"></div>
+  <div class="dash-back"><button onclick="backToLogin()">⟵ رجوع لصفحة الدخول</button></div>
+</div>
+
+<!-- Main App (child) -->
+<div id="appScreen" style="display:none;">
+  <div class="greeting-bar">
+    <div class="gtxt">أهلاً بيك يا بستاني <span id="childNameLabel">صغير</span> 🌟</div>
+    <span id="saveInd" style="font-size:11px;font-weight:700;transition:all .3s;"></span>
+    <button class="logout-link" onclick="backToLogin()">خروج</button>
+  </div>
+
+  <div class="week-header">
+    <button class="nav-btn" id="prevBtn" onclick="changeWeek(-1)">&#8250;</button>
+    <div class="winfo">
+      <h2 id="weekLabel">الأسبوع ١</h2>
+      <span id="weekDates"></span>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="changeWeek(1)">&#8249;</button>
+  </div>
+
+  <div class="week-strip" id="weekStrip"></div>
+  <div class="week-complete-banner" id="weekBanner">
+    <p>🌸 أحسنت! أكملت الأسبوع بالكامل!</p>
+    <span>الزرعة أزهرت وطلع الورد الأحمر الجميل 🌹</span>
+  </div>
+
+  <div class="main-card">
+    <div class="plant-area">
+      <div class="stage-badge" id="stageBadge">🌱 البذرة نايمة في التربة</div>
+      <svg id="plantSvg" viewBox="0 0 140 220" width="150" height="214" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <g id="ly0">
+          <ellipse cx="70" cy="157" rx="28" ry="6" fill="#6d4c41"/>
+          <ellipse cx="70" cy="154" rx="5" ry="4" fill="#795548"/>
+        </g>
+        <g id="ly1" display="none">
+          <line x1="70" y1="152" x2="70" y2="128" stroke="#4caf50" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="60" cy="133" rx="12" ry="7" fill="#66bb6a" transform="rotate(-30 60 133)"/>
+          <ellipse cx="80" cy="136" rx="11" ry="6" fill="#81c784" transform="rotate(25 80 136)"/>
+        </g>
+        <g id="ly2" display="none">
+          <line x1="70" y1="152" x2="70" y2="102" stroke="#388e3c" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="53" cy="114" rx="18" ry="10" fill="#66bb6a" transform="rotate(-28 53 114)"/>
+          <ellipse cx="87" cy="122" rx="16" ry="9" fill="#81c784" transform="rotate(22 87 122)"/>
+          <ellipse cx="70" cy="105" rx="14" ry="8" fill="#4caf50" transform="rotate(-5 70 105)"/>
+        </g>
+        <g id="ly3" display="none">
+          <line x1="70" y1="152" x2="70" y2="72" stroke="#2e7d32" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="125" x2="50" y2="103" stroke="#388e3c" stroke-width="3" stroke-linecap="round"/>
+          <line x1="70" y1="108" x2="92" y2="88" stroke="#388e3c" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="42" cy="96" rx="22" ry="12" fill="#4caf50" transform="rotate(-22 42 96)"/>
+          <ellipse cx="98" cy="80" rx="20" ry="11" fill="#66bb6a" transform="rotate(18 98 80)"/>
+          <ellipse cx="70" cy="66" rx="24" ry="13" fill="#81c784" transform="rotate(-4 70 66)"/>
+        </g>
+        <g id="ly4" display="none">
+          <line x1="70" y1="152" x2="70" y2="50" stroke="#1b5e20" stroke-width="5" stroke-linecap="round"/>
+          <line x1="70" y1="125" x2="46" y2="100" stroke="#2e7d32" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="70" y1="108" x2="96" y2="82" stroke="#2e7d32" stroke-width="3.5" stroke-linecap="round"/>
+          <ellipse cx="38" cy="92" rx="24" ry="13" fill="#388e3c" transform="rotate(-26 38 92)"/>
+          <ellipse cx="100" cy="74" rx="22" ry="12" fill="#4caf50" transform="rotate(22 100 74)"/>
+          <ellipse cx="70" cy="76" rx="26" ry="14" fill="#66bb6a"/>
+          <ellipse cx="56" cy="58" rx="18" ry="10" fill="#4caf50" transform="rotate(-15 56 58)"/>
+          <ellipse cx="84" cy="54" rx="17" ry="10" fill="#81c784" transform="rotate(10 84 54)"/>
+        </g>
+        <g id="ly5" display="none">
+          <circle cx="70" cy="34" r="13" fill="#f48fb1"/>
+          <circle cx="52" cy="42" r="12" fill="#f06292"/>
+          <circle cx="88" cy="42" r="12" fill="#f06292"/>
+          <circle cx="46" cy="26" r="11" fill="#e91e63"/>
+          <circle cx="94" cy="26" r="11" fill="#e91e63"/>
+          <circle cx="70" cy="18" r="12" fill="#f48fb1"/>
+          <circle cx="70" cy="34" r="9" fill="#ec407a"/>
+          <circle cx="52" cy="42" r="8" fill="#e91e63"/>
+          <circle cx="88" cy="42" r="8" fill="#e91e63"/>
+          <circle cx="46" cy="26" r="7.5" fill="#c2185b"/>
+          <circle cx="94" cy="26" r="7.5" fill="#c2185b"/>
+          <circle cx="70" cy="18" r="8" fill="#ec407a"/>
+          <circle cx="70" cy="33" r="12" fill="#ffee58"/>
+          <circle cx="70" cy="33" r="8" fill="#ffd600"/>
+          <circle cx="70" cy="33" r="4.5" fill="#f57f17"/>
+          <circle cx="70" cy="25" r="2" fill="#e65100"/>
+          <circle cx="64" cy="28" r="2" fill="#e65100"/>
+          <circle cx="76" cy="28" r="2" fill="#e65100"/>
+          <circle cx="62" cy="35" r="2" fill="#e65100"/>
+          <circle cx="78" cy="35" r="2" fill="#e65100"/>
+          <circle cx="66" cy="40" r="2" fill="#e65100"/>
+          <circle cx="74" cy="40" r="2" fill="#e65100"/>
+        </g>
+        <g id="ly6" display="none">
+          <circle cx="70" cy="32" r="16" fill="#b71c1c"/>
+          <circle cx="50" cy="42" r="14" fill="#c62828"/>
+          <circle cx="90" cy="42" r="14" fill="#c62828"/>
+          <circle cx="44" cy="24" r="13" fill="#d32f2f"/>
+          <circle cx="96" cy="24" r="13" fill="#d32f2f"/>
+          <circle cx="70" cy="14" r="15" fill="#b71c1c"/>
+          <circle cx="58" cy="50" r="11" fill="#e53935"/>
+          <circle cx="82" cy="50" r="11" fill="#e53935"/>
+          <circle cx="70" cy="32" r="11" fill="#e53935"/>
+          <circle cx="57" cy="38" r="9" fill="#ef5350"/>
+          <circle cx="83" cy="38" r="9" fill="#ef5350"/>
+          <circle cx="62" cy="24" r="9" fill="#ef5350"/>
+          <circle cx="78" cy="24" r="9" fill="#ef5350"/>
+          <circle cx="70" cy="33" r="9" fill="#ff7043"/>
+          <circle cx="70" cy="33" r="5" fill="#ff8a65"/>
+          <circle cx="70" cy="33" r="2.5" fill="#ffe0b2"/>
+          <circle cx="58" cy="20" r="2.5" fill="#ffcdd2"/>
+          <circle cx="82" cy="20" r="2.5" fill="#ffcdd2"/>
+          <circle cx="50" cy="30" r="2" fill="#ffcdd2"/>
+          <circle cx="90" cy="30" r="2" fill="#ffcdd2"/>
+        </g>
+        <rect x="45" y="163" width="50" height="38" rx="6" fill="#bf6030"/>
+        <rect x="40" y="156" width="60" height="14" rx="5" fill="#d4752e"/>
+        <text x="70" y="175" text-anchor="middle" font-size="8.5" fill="white" font-weight="700" font-family="Arial">فلتي الطيب</text>
+        <ellipse cx="70" cy="157" rx="28" ry="6" fill="#5d4037"/>
+      </svg>
+      <div style="font-size:11px;color:#388e3c;font-weight:700;margin-top:4px;text-align:center;" id="potLabel">البذرة نايمة 🌰</div>
+    </div>
+
+    <div class="tasks-area">
+      <div class="tasks-header">
+        <div class="tasks-title">📖 يوميات بستاني الصغير</div>
+        <div class="score-badge" id="scoreBadge">النقاط: ٠/٣٠</div>
+      </div>
+      <div id="dateRow" style="font-size:11px;color:#666;text-align:left;"></div>
+
+      <div class="section-label">📅 مهام يومية — اختار اليوم</div>
+      <div class="day-nav">
+        <div class="day-strip" id="dayStrip"></div>
+      </div>
+      <div class="tasks-grid" id="dailyGrid"></div>
+
+      <div class="section-label">🗓️ مهام أسبوعية — مرة في الأسبوع</div>
+      <div class="weekly-grid" id="weeklyGrid"></div>
+
+      <div class="prog-row">
+        <span class="prog-num" id="progNum">٠/٣٠</span>
+        <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+        <span id="progStars" style="font-size:14px;">⭐</span>
+      </div>
+      <div class="verse">💬 آية الأسبوع: «أنا هو الكرمة وأنتم الأغصان» (يو ١٥:٥)</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   STORAGE LAYER — uses window.storage (artifact API)
+   with graceful fallback to in-memory if unavailable
+   ═══════════════════════════════════════════════════ */
+// ── Firebase Realtime Database ──
+var FB_URL = 'https://note-2d4eb-default-rtdb.firebaseio.com/';
+
+var Store = {
+  async get(key) {
+    try {
+      var safeK = key.replace(/[.#$/\[\]]/g, '_');
+      var r = await fetch(FB_URL + safeK + '.json');
+      if(!r.ok) throw new Error('fetch failed');
+      var val = await r.json();
+      if(val === null) return null;
+      return typeof val === 'string' ? val : JSON.stringify(val);
+    } catch(e) {
+      // fallback localStorage
+      try { var v = localStorage.getItem('bustani_'+key); if(v!=null) return v; } catch(e2){}
+      return null;
+    }
+  },
+  async set(key, value) {
+    try {
+      var safeK = key.replace(/[.#$/\[\]]/g, '_');
+      var r = await fetch(FB_URL + safeK + '.json', {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(value)
+      });
+      if(!r.ok) throw new Error('put failed');
+    } catch(e) {
+      console.warn('Firebase set failed, using localStorage', e);
+    }
+    // always save localStorage as backup
+    try { localStorage.setItem('bustani_'+key, value); } catch(e){}
+    return true;
+  },
+  async list(prefix) {
+    try {
+      var r = await fetch(FB_URL + '.json?shallow=true');
+      if(!r.ok) throw new Error('list failed');
+      var data = await r.json();
+      if(!data) return [];
+      var safePrefix = prefix.replace(/[.#$/\[\]]/g, '_');
+      return Object.keys(data).filter(function(k){ return k.indexOf(safePrefix) === 0; });
+    } catch(e) {
+      // fallback localStorage
+      var keys = [];
+      try {
+        for(var i=0;i<localStorage.length;i++){
+          var k = localStorage.key(i);
+          if(k && k.indexOf('bustani_'+prefix)===0) keys.push(k.replace('bustani_',''));
+        }
+      } catch(e2){}
+      return keys;
+    }
+  }
+};
+
+/* ═══════════════ CONFIG ═══════════════ */
+var SECRET_CODE = 'bollykarbos';
+var DASH_CODE   = '55555';
+var childName   = '';
+
+/* Arabic numerals */
+var AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function toAr(n){ return String(n).split('').map(function(c){ return AR[+c]||c; }).join(''); }
+
+/* Safe storage key */
+function safeKey(name){ return name.trim().replace(/[\s\/\\'"+<>=;,!@#$%^&*()\[\]{}|?]+/g,'_').toLowerCase(); }
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+
+/* ═══════════════ TASKS & WEEKS ═══════════════ */
+var DAILY_TASKS = [
+  {emoji:'💧', name:'مياه الصلاة والتسبيح',       desc:'صلّيت وقلت يا الله وشكرت ربنا السيد'},
+  {emoji:'☀️', name:'شمس كلمة الإنجيل',            desc:'قرأت آية وعشت كلمة ربنا وقلبي'},
+  {emoji:'❤️', name:'سماد المحبة وثمار اليوم',     desc:'ساعدت في البيت وأبهجت أحد اليوم'},
+  {emoji:'🌬️', name:'رياح التواضع والمرونة',       desc:'سامحت أو قلت آسف لأحد أعزاء'},
+];
+var WEEKLY_TASKS = [
+  {emoji:'✂️', name:'مقص التوبة والاعتراف', desc:'اعترفت وأزلت الأشواك الخاطئة'},
+  {emoji:'📖', name:'جذور التناول المقدس',  desc:'تناولت جسد الرب وتغذيت من أمه'},
+];
+var DAYS_PER_WEEK = 7;
+var DAY_NAMES = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+var MAX_WEEK_SCORE = DAILY_TASKS.length * DAYS_PER_WEEK + WEEKLY_TASKS.length; // 30
+var TOTAL_WEEKS = 4;
+
+var WEEK_EMOJIS = ['🌰','🌿','🌼','🌹'];
+var STAGE_TAGS  = ['🌱 البذرة نايمة في التربة','🌿 طلعت برعمة!','🌱 الزرعة بدأت تنمو','🌱 الزرعة اتقوت','🌳 الزرعة بقت كبيرة!','🌼 بدأت تطلع براعم','🌸 طلع ورد!','🌹 الوردة الحمرا اكتملت!'];
+var POT_LABELS  = ['البذرة نايمة 🌰','برعمة صغيرة 🌿','زرعة صغيرة 🌱','زرعة تنمو 🌱','زرعة كبيرة 🌳','براعم ظهرت 🌼','زهرة جميلة 🌸','وردة حمرا 🌹'];
+
+/* State */
+var data = [];
+var currentWeek = 0;
+var currentDay  = 0;
+
+function freshWeek(){
+  var daily = [];
+  for(var d=0;d<DAYS_PER_WEEK;d++) daily.push([false,false,false,false]);
+  return { daily:daily, weekly:[false,false] };
+}
+function initData(){
+  data = [];
+  for(var i=0;i<TOTAL_WEEKS;i++) data.push(freshWeek());
+}
+
+/* ═══════════════ PERSISTENCE ═══════════════ */
+async function saveChildData(){
+  var key = 'child:' + safeKey(childName);
+  var payload = JSON.stringify({
+    name: childName,
+    data: data,
+    updatedAt: new Date().toISOString()
+  });
+  await Store.set(key, payload);
+  var ind = document.getElementById('saveInd');
+  if(ind){ ind.textContent='✅ اتحفظت'; ind.style.color='#2e7d32'; setTimeout(function(){ ind.textContent=''; },1800); }
+}
+
+async function loadChildData(){
+  var key = 'child:' + safeKey(childName);
+  var raw = await Store.get(key);
+  if(!raw) return false;
+  try {
+    var parsed = JSON.parse(raw);
+    if(parsed && parsed.data && Array.isArray(parsed.data) && parsed.data.length === TOTAL_WEEKS){
+      // Validate structure of each week
+      var ok = true;
+      parsed.data.forEach(function(wk){
+        if(!wk || !Array.isArray(wk.daily) || !Array.isArray(wk.weekly)) ok = false;
+      });
+      if(ok){ data = parsed.data; return true; }
+    }
+  } catch(e){ /* corrupted — start fresh */ }
+  return false;
+}
+
+/* ═══════════════ LOGIN ═══════════════ */
+function tryLogin(){
+  var nameVal = document.getElementById('nameInput').value.trim();
+  var codeVal = document.getElementById('codeInput').value.trim().toLowerCase();
+  var err     = document.getElementById('loginError');
+  var loading = document.getElementById('loginLoading');
+
+  err.textContent = '';
+
+  if(codeVal === DASH_CODE){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashScreen').style.display  = 'block';
+    loadDashboard();
+    return;
+  }
+
+  if(!nameVal){
+    err.textContent = '❌ اكتب اسمك الأول!';
+    document.getElementById('nameInput').focus();
+    setTimeout(function(){ err.textContent=''; }, 2500);
+    return;
+  }
+
+  if(codeVal === SECRET_CODE){
+    childName = nameVal;
+    loading.textContent = '⏳ بنفتح زرعتك...';
+    initData();
+
+    function openApp(){
+      loading.textContent = '';
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('appScreen').style.display  = 'block';
+      document.getElementById('childNameLabel').textContent = childName;
+      goWeek(0);
+    }
+
+    // timeout: لو Firebase اتأخر أكتر من 5 ثواني افتح على طول
+    var loginTimer = setTimeout(function(){ openApp(); }, 5000);
+
+    loadChildData().then(function(found){
+      return saveChildData();
+    }).then(function(){
+      clearTimeout(loginTimer);
+      openApp();
+    }).catch(function(e){
+      clearTimeout(loginTimer);
+      openApp();
+    });
+  } else {
+    err.textContent = '❌ الكود غلط! حاول تاني';
+    document.getElementById('codeInput').value = '';
+    document.getElementById('codeInput').focus();
+    setTimeout(function(){ err.textContent=''; }, 2500);
+  }
+}
+
+function backToLogin(){
+  document.getElementById('appScreen').style.display  = 'none';
+  document.getElementById('dashScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('nameInput').value = '';
+  document.getElementById('codeInput').value = '';
+  document.getElementById('nameInput').focus();
+  childName = '';
+}
+
+document.getElementById('codeInput').addEventListener('keydown', function(e){ if(e.key==='Enter') tryLogin(); });
+document.getElementById('nameInput').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('codeInput').focus(); });
+
+/* ═══════════════ UI HELPERS ═══════════════ */
+function thornSVG(){
+  return '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">'
+    +'<circle cx="14" cy="14" r="13" fill="#ffcdd2" stroke="#e57373" stroke-width="1.5"/>'
+    +'<path d="M14 5 C10 9,7 12,9 16 C11 19,14 17,14 21 C14 17,17 19,19 16 C21 12,18 9,14 5 Z" fill="#e53935"/>'
+    +'<path d="M7 15 C10 11,13 12,14 15 C15 12,18 11,21 15" fill="none" stroke="#c62828" stroke-width="1.2"/>'
+    +'</svg>';
+}
+
+function weekScore(wd){
+  var s = 0;
+  if(wd && wd.daily) wd.daily.forEach(function(day){ day.forEach(function(v){ if(v) s++; }); });
+  if(wd && wd.weekly) wd.weekly.forEach(function(v){ if(v) s++; });
+  return s;
+}
+
+/* ═══════════════ RENDER ═══════════════ */
+function renderStrip(){
+  var s = document.getElementById('weekStrip');
+  s.innerHTML = '';
+  for(var i=0;i<TOTAL_WEEKS;i++){
+    var score = weekScore(data[i]);
+    var cls = 'wdot' + (i===currentWeek?' active':'') + (score===MAX_WEEK_SCORE?' completed':'');
+    var div = document.createElement('div');
+    div.className = cls;
+    (function(x){ div.onclick = function(){ goWeek(x); }; })(i);
+    div.innerHTML = '<div class="wd-emoji">'+WEEK_EMOJIS[i]+'</div><div class="wd-lbl">أسبوع '+toAr(i+1)+'</div>';
+    s.appendChild(div);
+  }
+}
+
+function renderDayStrip(){
+  var s = document.getElementById('dayStrip');
+  s.innerHTML = '';
+  var wd = data[currentWeek];
+  for(var d=0;d<DAYS_PER_WEEK;d++){
+    var full = wd.daily[d].filter(Boolean).length === DAILY_TASKS.length;
+    var cls = 'day-pill' + (d===currentDay?' active':'') + (full?' full':'');
+    var div = document.createElement('div');
+    div.className = cls;
+    div.textContent = DAY_NAMES[d];
+    (function(x){ div.onclick = function(){ currentDay=x; renderDayStrip(); renderDailyTasks(); }; })(d);
+    s.appendChild(div);
+  }
+}
+
+function renderDailyTasks(){
+  var grid = document.getElementById('dailyGrid');
+  grid.innerHTML = '';
+  var dayDone = data[currentWeek].daily[currentDay];
+  for(var i=0;i<DAILY_TASKS.length;i++){
+    var t = DAILY_TASKS[i];
+    var done = dayDone[i];
+    var div = document.createElement('div');
+    div.className = 'task-item' + (done?' done':'');
+    div.setAttribute('data-idx', String(i));
+    if(!done) div.addEventListener('click', onDailyTaskClick);
+    div.innerHTML = '<div class="thorn-wrap'+(done?' removed':'')+'" id="dthorn'+i+'">'+thornSVG()+'</div>'
+      + '<div class="task-emoji">'+t.emoji+'</div>'
+      + '<div class="task-info"><div class="t-name">'+t.name+'</div><div class="t-desc">'+t.desc+'</div></div>'
+      + '<div class="task-check"><div class="check-inner"></div></div>';
+    grid.appendChild(div);
+  }
+}
+
+function renderWeeklyTasks(){
+  var grid = document.getElementById('weeklyGrid');
+  grid.innerHTML = '';
+  var wd = data[currentWeek];
+  for(var i=0;i<WEEKLY_TASKS.length;i++){
+    var t = WEEKLY_TASKS[i];
+    var done = wd.weekly[i];
+    var div = document.createElement('div');
+    div.className = 'task-item weekly-item' + (done?' done':'');
+    div.setAttribute('data-idx', String(i));
+    if(!done) div.addEventListener('click', onWeeklyTaskClick);
+    div.innerHTML = '<div class="thorn-wrap'+(done?' removed':'')+'" id="wthorn'+i+'">'+thornSVG()+'</div>'
+      + '<div class="task-emoji">'+t.emoji+'</div>'
+      + '<div class="task-info"><div class="t-name">'+t.name+'</div><div class="t-desc">'+t.desc+'</div></div>'
+      + '<div class="task-check"><div class="check-inner"></div></div>';
+    grid.appendChild(div);
+  }
+}
+
+function onDailyTaskClick(){
+  var idx = parseInt(this.getAttribute('data-idx'));
+  if(data[currentWeek].daily[currentDay][idx]) return;
+  data[currentWeek].daily[currentDay][idx] = true;
+  var th = document.getElementById('dthorn'+idx);
+  if(th) th.classList.add('removed');
+  this.classList.add('done');
+  this.removeEventListener('click', onDailyTaskClick);
+  afterTaskCheck();
+}
+
+function onWeeklyTaskClick(){
+  var idx = parseInt(this.getAttribute('data-idx'));
+  if(data[currentWeek].weekly[idx]) return;
+  data[currentWeek].weekly[idx] = true;
+  var th = document.getElementById('wthorn'+idx);
+  if(th) th.classList.add('removed');
+  this.classList.add('done');
+  this.removeEventListener('click', onWeeklyTaskClick);
+  afterTaskCheck();
+}
+
+function afterTaskCheck(){
+  updateUI();
+  renderDayStrip();
+  var score = weekScore(data[currentWeek]);
+  drawPlant(score);
+  saveChildData(); // fire-and-forget, no await needed here
+  if(score === MAX_WEEK_SCORE){
+    setTimeout(function(){
+      document.getElementById('weekBanner').classList.add('show');
+      renderStrip();
+    }, 600);
+  }
+}
+
+function updateUI(){
+  var score = weekScore(data[currentWeek]);
+  document.getElementById('progFill').style.width = (score/MAX_WEEK_SCORE*100)+'%';
+  document.getElementById('progNum').textContent   = toAr(score)+'/'+toAr(MAX_WEEK_SCORE);
+  document.getElementById('scoreBadge').textContent = 'النقاط: '+toAr(score)+'/'+toAr(MAX_WEEK_SCORE);
+  var starCount = Math.max(1, Math.round(score/MAX_WEEK_SCORE*6));
+  var stars=''; for(var i=0;i<starCount;i++) stars+='⭐';
+  document.getElementById('progStars').textContent = stars;
+  drawPlant(score);
+}
+
+function drawPlant(score){
+  var stage = Math.round((score/MAX_WEEK_SCORE)*6);
+  for(var i=0;i<=6;i++) document.getElementById('ly'+i).setAttribute('display','none');
+  if(stage===0){ document.getElementById('ly0').setAttribute('display','block'); }
+  else if(stage===1){ document.getElementById('ly1').setAttribute('display','block'); }
+  else if(stage===2){ document.getElementById('ly1').setAttribute('display','block'); document.getElementById('ly2').setAttribute('display','block'); }
+  else if(stage===3){ document.getElementById('ly2').setAttribute('display','block'); document.getElementById('ly3').setAttribute('display','block'); }
+  else if(stage===4){ document.getElementById('ly3').setAttribute('display','block'); document.getElementById('ly4').setAttribute('display','block'); }
+  else if(stage===5){ document.getElementById('ly4').setAttribute('display','block'); document.getElementById('ly5').setAttribute('display','block'); }
+  else if(stage===6){ document.getElementById('ly4').setAttribute('display','block'); document.getElementById('ly6').setAttribute('display','block'); }
+  var idx = Math.min(stage,7);
+  document.getElementById('stageBadge').textContent = STAGE_TAGS[idx];
+  document.getElementById('potLabel').textContent   = POT_LABELS[idx];
+}
+
+function goWeek(w){
+  if(w<0||w>=TOTAL_WEEKS) return;
+  currentWeek = w;
+  currentDay  = 0;
+  document.getElementById('weekBanner').classList.remove('show');
+  renderStrip();
+  renderDayStrip();
+  renderDailyTasks();
+  renderWeeklyTasks();
+  updateUI();
+
+  document.getElementById('weekLabel').textContent = 'الأسبوع '+toAr(w+1);
+  document.getElementById('weekDates').textContent = '';
+  document.getElementById('dateRow').textContent   = '';
+  document.getElementById('prevBtn').disabled = (w===0);
+  document.getElementById('nextBtn').disabled = (w===TOTAL_WEEKS-1);
+
+  if(weekScore(data[currentWeek])===MAX_WEEK_SCORE){
+    document.getElementById('weekBanner').classList.add('show');
+  }
+}
+
+function changeWeek(dir){ goWeek(currentWeek-dir); }
+
+/* ═══════════════ SERVANT DASHBOARD ═══════════════ */
+var dashChildren = [];
+var dashSort     = 'top';
+var dashExpanded = {};
+
+async function loadDashboard(){
+  var content    = document.getElementById('dashContent');
+  var refreshBtn = document.getElementById('refreshBtn');
+  refreshBtn.classList.add('spin');
+  content.innerHTML = '<div class="dash-empty"><span class="eemoji">⏳</span>بنجمع بيانات الأطفال...</div>';
+
+  var children = [];
+  try{
+    var keys = await Store.list('child:');
+    for(var i=0;i<keys.length;i++){
+      try{
+        var raw = await Store.get(keys[i]);
+        if(!raw) continue;
+        var parsed = JSON.parse(raw);
+        if(parsed && parsed.name){
+          // Ensure data has TOTAL_WEEKS weeks with proper structure
+          if(!parsed.data || !Array.isArray(parsed.data) || parsed.data.length !== TOTAL_WEEKS){
+            parsed.data = [];
+            for(var w=0;w<TOTAL_WEEKS;w++) parsed.data.push(freshWeek());
+          }
+          // Repair each week if needed
+          for(var w=0;w<TOTAL_WEEKS;w++){
+            if(!parsed.data[w] || !Array.isArray(parsed.data[w].daily) || !Array.isArray(parsed.data[w].weekly)){
+              parsed.data[w] = freshWeek();
+            }
+          }
+          children.push(parsed);
+        }
+      }catch(e){ /* skip */ }
+    }
+  }catch(e){
+    refreshBtn.classList.remove('spin');
+    content.innerHTML = '<div class="dash-empty"><span class="eemoji">⚠️</span>حصل خطأ في تحميل البيانات. جرب تضغط "تحديث" تاني.</div>';
+    return;
+  }
+
+  refreshBtn.classList.remove('spin');
+  dashChildren = children;
+  renderDashboard();
+}
+
+function setSort(mode){
+  dashSort = mode;
+  ['top','name','need'].forEach(function(m){
+    document.getElementById('sort'+m.charAt(0).toUpperCase()+m.slice(1)+'Btn')
+      .classList.toggle('active', m===mode);
+  });
+  // Fix button IDs
+  document.getElementById('sortTopBtn').classList.toggle('active',  mode==='top');
+  document.getElementById('sortNameBtn').classList.toggle('active', mode==='name');
+  document.getElementById('sortNeedBtn').classList.toggle('active', mode==='need');
+  renderDashboard();
+}
+
+function childTotal(c){
+  return (c.data||[]).reduce(function(s,wk){ return s+weekScore(wk); }, 0);
+}
+
+function renderDashboard(){
+  var content  = document.getElementById('dashContent');
+  var children = dashChildren.slice();
+
+  /* Stats (always full dataset) */
+  var totalChildren = children.length;
+  var activeCount=0, fullCount=0, totalPoints=0;
+  children.forEach(function(c){
+    var scores = (c.data||[]).map(weekScore);
+    if(scores.some(function(s){ return s>0; })) activeCount++;
+    if(scores.length===TOTAL_WEEKS && scores.every(function(s){ return s===MAX_WEEK_SCORE; })) fullCount++;
+    totalPoints += scores.reduce(function(s,v){ return s+v; },0);
+  });
+  document.getElementById('statTotal').textContent  = toAr(totalChildren);
+  document.getElementById('statActive').textContent = toAr(activeCount);
+  document.getElementById('statFull').textContent   = toAr(fullCount);
+  document.getElementById('statAvg').textContent    = totalChildren ? toAr(Math.round((totalPoints/totalChildren)*10)/10) : '٠';
+
+  if(totalChildren===0){
+    content.innerHTML='<div class="dash-empty"><span class="eemoji">🌱</span>لسه مفيش أطفال سجلوا في النوتة<br/>هيظهروا هنا أول ما يدخلوا بأسمائهم.</div>';
+    return;
+  }
+
+  /* Search filter */
+  var query = (document.getElementById('dashSearch').value||'').trim().toLowerCase();
+  if(query) children = children.filter(function(c){ return c.name.toLowerCase().indexOf(query)!==-1; });
+
+  if(!children.length){
+    content.innerHTML='<div class="dash-empty"><span class="eemoji">🔍</span>مفيش طفل بهذا الاسم.</div>';
+    return;
+  }
+
+  /* Sort */
+  if(dashSort==='top')  children.sort(function(a,b){ return childTotal(b)-childTotal(a); });
+  else if(dashSort==='name') children.sort(function(a,b){ return a.name.localeCompare(b.name,'ar'); });
+  else children.sort(function(a,b){ return childTotal(a)-childTotal(b); });
+
+  var html='<div class="dash-list">';
+  var maxTotal = TOTAL_WEEKS * MAX_WEEK_SCORE;
+
+  children.forEach(function(c){
+    var key    = safeKey(c.name);
+    var scores = (c.data||[]).map(weekScore);
+    var total  = scores.reduce(function(s,v){return s+v;},0);
+    var initial= c.name.trim().charAt(0)||'🌱';
+    var isExp  = !!dashExpanded[key];
+
+    var updatedTxt='';
+    if(c.updatedAt){
+      try{
+        var d=new Date(c.updatedAt);
+        var months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+        updatedTxt='آخر نشاط: '+d.getDate()+' '+months[d.getMonth()];
+      }catch(e){}
+    }
+
+    html+='<div class="child-card'+(isExp?' expanded':'')+'" id="card-'+key+'">';
+    html+='<div class="child-head" onclick="toggleChild(\''+key+'\')">';
+    html+='<div class="child-avatar">'+escapeHtml(initial)+'</div>';
+    html+='<div class="child-main">';
+    html+='<div class="child-name">'+escapeHtml(c.name)+'</div>';
+    html+='<div class="child-sub">'+(updatedTxt||'لسه ملحقش يبدأ مهام')+'</div>';
+    html+='</div>';
+    html+='<div class="child-weeks-mini">';
+    for(var w=0;w<TOTAL_WEEKS;w++){
+      var sc=scores[w]||0;
+      var mcls=sc===MAX_WEEK_SCORE?'full':(sc>0?'partial':'zero');
+      html+='<div class="wmini '+mcls+'">'+toAr(w+1)+'</div>';
+    }
+    html+='</div>';
+    html+='<div class="child-total-badge">'+toAr(total)+'/'+toAr(maxTotal)+'</div>';
+    html+='<div class="chev">▾</div>';
+    html+='<button class="delete-btn" onclick="event.stopPropagation();confirmDelete(\'' + key + '\')">🗑️</button>';
+    html+='</div>'; /* child-head */
+
+    html+='<div class="confirm-delete" id="confirm-'+key+'">';
+    html+='<p>⚠️ هتمسح '+escapeHtml(c.name)+' نهائياً؟</p>';
+    html+='<div class="confirm-btns">';
+    html+='<button class="confirm-yes" onclick="deleteChild(\'' + key + '\')">امسح</button>';
+    html+='<button class="confirm-no" onclick="cancelDelete(\'' + key + '\')">لأ</button>';
+    html+='</div></div>';
+    html+='<div class="child-detail">';
+    for(var w2=0;w2<TOTAL_WEEKS;w2++){
+      var wd=(c.data&&c.data[w2])?c.data[w2]:freshWeek();
+      var wscore=weekScore(wd);
+      html+='<div class="detail-week-block">';
+      html+='<div class="detail-week-title"><span>أسبوع '+toAr(w2+1)+' '+WEEK_EMOJIS[w2]+'</span><span class="dwscore">'+toAr(wscore)+'/'+toAr(MAX_WEEK_SCORE)+'</span></div>';
+      html+='<div class="detail-tasks">';
+      for(var wt=0;wt<WEEKLY_TASKS.length;wt++){
+        var wdone=!!(wd.weekly&&wd.weekly[wt]);
+        html+='<span class="dtask '+(wdone?'done':'miss')+'">'+(wdone?'✓':'•')+' '+escapeHtml(WEEKLY_TASKS[wt].name)+'</span>';
+      }
+      html+='</div>';
+      html+='<div class="detail-tasks" style="margin-top:6px;">';
+      for(var dd=0;dd<DAYS_PER_WEEK;dd++){
+        var dayArr=(wd.daily&&wd.daily[dd])?wd.daily[dd]:[false,false,false,false];
+        var dCount=dayArr.filter(Boolean).length;
+        var dCls=dCount===DAILY_TASKS.length?'done':(dCount>0?'':'miss');
+        html+='<span class="dtask '+dCls+'">'+DAY_NAMES[dd]+': '+toAr(dCount)+'/'+toAr(DAILY_TASKS.length)+'</span>';
+      }
+      html+='</div></div>';
+    }
+    html+='</div></div>'; /* child-detail + child-card */
+  });
+  html+='</div>';
+  content.innerHTML=html;
+}
+
+function toggleChild(key){
+  dashExpanded[key]=!dashExpanded[key];
+  var card=document.getElementById('card-'+key);
+  if(card) card.classList.toggle('expanded', dashExpanded[key]);
+}
+
+function confirmDelete(key){
+  var el=document.getElementById('confirm-'+key);
+  if(el) el.classList.add('show');
+}
+
+function cancelDelete(key){
+  var el=document.getElementById('confirm-'+key);
+  if(el) el.classList.remove('show');
+}
+
+async function deleteChild(key){
+  // Delete from Firebase
+  try{
+    var safeK = key.replace(/[.#$\/\[\]]/g,'_');
+    await fetch(FB_URL + safeK + '.json', {method:'DELETE'});
+  }catch(e){}
+  // Delete from localStorage
+  try{ localStorage.removeItem('bustani_child:'+key.replace('child_','')); }catch(e){}
+  // Remove from dashChildren array
+  dashChildren = dashChildren.filter(function(c){ return safeKey(c.name) !== key; });
+  renderDashboard();
+}
+</script>
+</body>
+</html>
