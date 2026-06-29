@@ -127,17 +127,20 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
 .child-main{flex:1;min-width:0;}
 .child-name{font-size:14.5px;font-weight:700;color:#1b5e20;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .child-sub{font-size:11px;color:#888;margin-top:2px;}
-.child-weeks-mini{display:flex;gap:4px;flex:0 0 auto;}
-.wmini{width:26px;height:26px;border-radius:7px;background:#f0f0f0;color:#aaa;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.wmini.full{background:#66bb6a;color:#fff;}
-.wmini.partial{background:#ffd54f;color:#7a5b00;}
-.wmini.zero{background:#f0f0f0;color:#bbb;}
 .child-total-badge{flex:0 0 auto;background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:14px;padding:5px 10px;font-size:12px;font-weight:700;color:#2e7d32;white-space:nowrap;}
 .chev{flex:0 0 18px;font-size:14px;color:#9ab;transition:transform .2s;}
 .child-card.expanded .chev{transform:rotate(180deg);}
 
 .child-detail{display:none;padding:0 16px 16px;border-top:1.5px solid #e8f5e9;}
 .child-card.expanded .child-detail{display:block;}
+.month-row{background:#f4f9ee;border:1.5px solid #dcebc8;border-radius:11px;margin-top:8px;overflow:hidden;}
+.month-row-head{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;}
+.month-row-head .mr-name{flex:1;font-size:12.5px;font-weight:700;color:#1b5e20;}
+.month-row-head .mr-score{font-size:11.5px;font-weight:700;color:#558b2f;background:#e8f5e9;border-radius:10px;padding:3px 9px;}
+.month-row-head .mr-chev{font-size:12px;color:#9ab;transition:transform .2s;flex:0 0 14px;}
+.month-row.open .mr-chev{transform:rotate(180deg);}
+.month-row-body{display:none;padding:0 12px 10px;}
+.month-row.open .month-row-body{display:block;}
 .detail-week-block{background:#f9fbe7;border:1.5px solid #e2eec0;border-radius:12px;padding:10px 12px;margin-top:10px;}
 .detail-week-title{font-size:12px;font-weight:700;color:#1b5e20;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;}
 .detail-week-title .dwscore{font-size:11px;color:#558b2f;font-weight:700;}
@@ -157,7 +160,6 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
 .confirm-yes{background:#e53935;color:#fff;border:none;border-radius:8px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
 .confirm-no{background:#eee;color:#555;border:none;border-radius:8px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;}
 
-/* Storage status indicator */
 .storage-status{font-size:10px;color:#888;text-align:center;padding:4px;margin-top:4px;}
 .storage-status.ok{color:#2e7d32;}
 .storage-status.err{color:#c62828;}
@@ -165,37 +167,23 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
 /* ═══════════════ MOBILE RESPONSIVE ═══════════════ */
 @media (max-width: 600px) {
   body{padding:10px;}
-
-  /* Login */
   .login-card{padding:24px 16px;}
   .login-plant{font-size:52px;}
   .login-title{font-size:18px;}
-
-  /* Week header */
   .week-header{padding:10px 12px;border-radius:14px;}
   .week-header .winfo h2{font-size:15px;}
   .week-header .winfo span{font-size:10px;}
   .nav-btn{width:36px;height:36px;font-size:20px;}
-
-  /* Week strip */
   .week-strip{gap:5px;}
   .wdot{height:52px;}
   .wdot .wd-emoji{font-size:18px;}
   .wdot .wd-lbl{font-size:9px;}
-
-  /* Main card — stack vertically on mobile */
   .main-card{flex-direction:column;padding:12px;gap:12px;}
-
-  /* Plant area — smaller on mobile */
   .plant-area{flex:none;width:100%;min-height:180px;flex-direction:row;justify-content:center;align-items:center;gap:12px;padding:10px;}
   .plant-area svg{width:100px;height:143px;}
   .stage-badge{font-size:10px;padding:3px 8px;margin-bottom:0;}
   #potLabel{font-size:10px;margin-top:0;}
-
-  /* Plant area column inside row layout */
   .plant-area{flex-direction:column;}
-
-  /* Tasks */
   .tasks-title{font-size:13px;}
   .score-badge{font-size:11px;padding:3px 8px;}
   .tasks-grid{grid-template-columns:1fr 1fr;gap:7px;}
@@ -205,26 +193,12 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
   .task-info .t-name{font-size:11px;}
   .task-info .t-desc{font-size:9px;}
   .task-check{width:20px;height:20px;}
-
-  /* Day strip */
   .day-pill{font-size:9px;padding:5px 2px;min-width:28px;}
-
-  /* Section label */
   .section-label{font-size:10px;}
-
-  /* Progress */
   .prog-num{font-size:11px;}
-
-  /* Verse */
   .verse{font-size:11px;}
-
-  /* Banner */
   .week-complete-banner p{font-size:13px;}
-
-  /* Greeting bar */
   .greeting-bar .gtxt{font-size:12px;}
-
-  /* Dashboard */
   .dash-header{padding:14px 14px;border-radius:14px;flex-wrap:wrap;gap:10px;}
   .dash-header .htxt h1{font-size:16px;}
   .dash-stats{grid-template-columns:repeat(2,1fr);gap:8px;}
@@ -235,9 +209,7 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
   .sort-btn{font-size:11px;padding:7px 10px;}
   .child-head{padding:10px 12px;gap:8px;}
   .child-name{font-size:13px;}
-  .child-weeks-mini{display:none;}
   .child-total-badge{font-size:11px;padding:4px 8px;}
-  .wmini{width:22px;height:22px;font-size:9px;}
   .detail-tasks{gap:4px;}
   .dtask{font-size:9.5px;padding:3px 7px;}
 }
@@ -269,7 +241,7 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
       <input type="text" id="codeInput" placeholder="اكتب الكود هنا..." autocomplete="off" autocorrect="off" spellcheck="false"/>
     </div>
 
-    <button class="login-btn" onclick="tryLogin()">ادخل 🌿</button>
+    <button class="login-btn" id="loginBtn">ادخل 🌿</button>
     <div class="login-error" id="loginError"></div>
     <div class="login-loading" id="loginLoading"></div>
     <div class="login-hint">💡 الكود سري بينك وبين أهلك</div>
@@ -289,8 +261,8 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
   <div class="dash-stats">
     <div class="dash-stat"><div class="ic">🧒</div><div class="num" id="statTotal">٠</div><div class="lbl">طفل مسجل</div></div>
     <div class="dash-stat"><div class="ic">✅</div><div class="num" id="statActive">٠</div><div class="lbl">عملوا مهمة على الأقل</div></div>
-    <div class="dash-stat"><div class="ic">🌹</div><div class="num" id="statFull">٠</div><div class="lbl">أكملوا كل الأسابيع</div></div>
-    <div class="dash-stat"><div class="ic">⭐</div><div class="num" id="statAvg">٠</div><div class="lbl">متوسط النقاط للطفل</div></div>
+    <div class="dash-stat"><div class="ic">🌹</div><div class="num" id="statFull">٠</div><div class="lbl">أكملوا أسبوع كامل</div></div>
+    <div class="dash-stat"><div class="ic">⭐</div><div class="num" id="statAvg">٠</div><div class="lbl">متوسط نقاط آخر أسبوع</div></div>
   </div>
 
   <div class="dash-toolbar">
@@ -318,18 +290,18 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
   </div>
 
   <div class="week-header">
-    <button class="nav-btn" id="prevBtn" onclick="changeWeek(-1)">&#8250;</button>
+    <button class="nav-btn" id="prevBtn" onclick="changeMonth(-1)">&#8250;</button>
     <div class="winfo">
-      <h2 id="weekLabel">الأسبوع ١</h2>
+      <h2 id="weekLabel">يناير ٢٠٢٦</h2>
       <span id="weekDates"></span>
     </div>
-    <button class="nav-btn" id="nextBtn" onclick="changeWeek(1)">&#8249;</button>
+    <button class="nav-btn" id="nextBtn" onclick="changeMonth(1)">&#8249;</button>
   </div>
 
   <div class="week-strip" id="weekStrip"></div>
   <div class="week-complete-banner" id="weekBanner">
     <p>🌸 أحسنت! أكملت الأسبوع بالكامل!</p>
-    <span>الزرعة أزهرت وطلع الورد الأحمر الجميل 🌹</span>
+    <span>الزرعة أزهرت وطلع الثمرالجميل 🌹</span>
   </div>
 
   <div class="main-card">
@@ -417,7 +389,7 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
         </g>
         <rect x="45" y="163" width="50" height="38" rx="6" fill="#bf6030"/>
         <rect x="40" y="156" width="60" height="14" rx="5" fill="#d4752e"/>
-        <text x="70" y="175" text-anchor="middle" font-size="8.5" fill="white" font-weight="700" font-family="Arial">فلتي الطيب</text>
+        <text x="70" y="175" text-anchor="middle" font-size="8.5" fill="white" font-weight="700" font-family="Arial">الزرعة</text>
         <ellipse cx="70" cy="157" rx="28" ry="6" fill="#5d4037"/>
       </svg>
       <div style="font-size:11px;color:#388e3c;font-weight:700;margin-top:4px;text-align:center;" id="potLabel">البذرة نايمة 🌰</div>
@@ -444,18 +416,135 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#f0f7ee;min-heigh
         <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
         <span id="progStars" style="font-size:14px;">⭐</span>
       </div>
-      <div class="verse">💬 آية الأسبوع: «أنا هو الكرمة وأنتم الأغصان» (يو ١٥:٥)</div>
+      <div class="verse" id="weekVerse">💬 آية الأسبوع: ...</div>
     </div>
   </div>
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════
-   STORAGE LAYER — uses window.storage (artifact API)
-   with graceful fallback to in-memory if unavailable
-   ═══════════════════════════════════════════════════ */
-// ── Firebase Realtime Database ──
 var FB_URL = 'https://note-2d4eb-default-rtdb.firebaseio.com/';
+
+/* ═══════════════ آيات الأسبوع عن الروح القدس وثماره ═══════════════ */
+var WEEKLY_VERSES = [
+  /* ١ - من درس رعاية بذرة الروح القدس */
+  {text:'«لاَ بِأَعْمَالٍ فِي الْبِرِّ عَمِلْنَاهَا نَحْنُ، بَلْ بِمَقْتَضَى رَحْمَتِهِ خَلَّصَنَا بِغَسْلِ الْمِيلاَدِ الثَّانِي وَتَجْدِيدِ الرُّوحِ الْقُدُسِ»', ref:'(تي ٣: ٥)'},
+  /* ٢ */
+  {text:'«وَاظِبُوا عَلَى الصَّلاَةِ سَاهِرِينَ فِيهَا بِالشُّكْرِ»', ref:'(كو ٤: ٢)'},
+  /* ٣ */
+  {text:'«مَنْ يَأْكُلُ جَسَدِي وَيَشْرَبُ دَمِي يَثْبُتُ فِيَّ وَأَنَا فِيهِ»', ref:'(يو ٦: ٥٦)'},
+  /* ٤ */
+  {text:'«سِرَاجٌ لِرِجْلَيَّ كَلاَمُكَ وَنُورٌ لِسَبِيلِي»', ref:'(مز ١١٩: ١٠٥)'},
+  /* ٥ */
+  {text:'«أُبَارِكُ الرَّبَّ فِي كُلِّ حِينٍ. دَائِمًا تَسْبِيحُهُ فِي فَمِي»', ref:'(مز ٣٤: ١)'},
+  /* ٦ */
+  {text:'«اَلأَمِينُ فِي الْقَلِيلِ أَمِينٌ أَيْضًا فِي الْكَثِيرِ»', ref:'(لو ١٦: ١٠)'},
+  /* ٧ */
+  {text:'«مَنْ يَكْتُمُ خَطَايَاهُ لاَ يَنْجَحُ، وَمَنْ يُقِرُّ بِهَا وَيَتْرُكُهَا يُرْحَمُ»', ref:'(أم ٢٨: ١٣)'},
+  /* ٨ */
+  {text:'«يَنْبَغِي أَنْ يُصَلَّى كُلَّ حِينٍ وَلاَ يُمَلَّ»', ref:'(لو ١٨: ١)'},
+  /* ٩ */
+  {text:'«صَالِحَةٌ الصَّلاَةُ مَعَ الصَّوْمِ وَالصَّدَقَةُ خَيْرٌ مِنِ ادِّخَارِ كُنُوزِ الذَّهَبِ»', ref:'(طو ١٢: ٨)'},
+  /* ١٠ */
+  {text:'«اَلْمَحَبَّةُ تَتَأَنَّى وَتَرْفُقُ. الْمَحَبَّةُ لاَ تَحْسُدُ. الْمَحَبَّةُ لاَ تَتَفَاخَرُ وَلاَ تَنْتَفِخُ وَلاَ تَقْبُحُ وَلاَ تَطْلُبُ مَا لِنَفْسِهَا وَلاَ تَحْتَدُّ وَلاَ تَظُنُّ السُّوءَ»', ref:'(١كو ١٣: ٤-٥)'},
+  /* ١١ */
+  {text:'«إِنِ اعْتَرَفْنَا بِخَطَايَانَا فَهُوَ أَمِينٌ وَعَادِلٌ حَتَّى يَغْفِرَ لَنَا خَطَايَانَا وَيُطَهِّرَنَا مِنْ كُلِّ إِثْمٍ»', ref:'(١يو ١: ٩)'},
+  /* ١٢ */
+  {text:'«لَكِنَّكُمْ سَتَنَالُونَ قُوَّةً مَتَى حَلَّ الرُّوحُ الْقُدُسُ عَلَيْكُمْ، وَتَكُونُونَ لِي شُهُودًا فِي أُورُشَلِيمَ وَفِي كُلِّ الْيَهُودِيَّةِ وَالسَّامِرَةِ وَإِلَى أَقْصَى الأَرْضِ»', ref:'(أع ١: ٨)'},
+  /* ١٣ */
+  {text:'«فَيَكُونُ كَشَجَرَةٍ مَغْرُوسَةٍ عِنْدَ مَجَارِي الْمِيَاهِ الَّتِي تُعْطِي ثَمَرَهَا فِي أَوَانِهِ وَوَرَقُهَا لاَ يَذْبُلُ وَكُلُّ مَا يَصْنَعُهُ يَنْجَحُ»', ref:'(مز ١: ٣)'},
+  /* ١٤ */
+  {text:'«وَأَمَّا ثَمَرُ الرُّوحِ فَهُوَ: مَحَبَّةٌ، فَرَحٌ، سَلاَمٌ، طُولُ أَنَاةٍ، لُطْفٌ، صَلاَحٌ، إِيمَانٌ، وَدَاعَةٌ، تَعَفُّفٌ»', ref:'(غل ٥: ٢٢-٢٣)'},
+  /* ١٥ - آيات إضافية عن ثمار الروح القدس */
+  {text:'«أَنَا هُوَ الْكَرْمَةُ وَأَنْتُمُ الأَغْصَانُ. مَنْ ثَبَتَ فِيَّ وَأَنَا فِيهِ هَذَا يَأْتِي بِثَمَرٍ كَثِيرٍ، لأَنَّكُمْ بِدُونِي لاَ تَسْتَطِيعُونَ أَنْ تَفْعَلُوا شَيْئًا»', ref:'(يو ١٥: ٥)'},
+  /* ١٦ */
+  {text:'«لَيْسَ أَنْتُمُ اخْتَرْتُمُونِي بَلْ أَنَا اخْتَرْتُكُمْ وَأَقَمْتُكُمْ لِتَذْهَبُوا وَتَأْتُوا بِثَمَرٍ وَيَدُومَ ثَمَرُكُمْ»', ref:'(يو ١٥: ١٦)'},
+  /* ١٧ */
+  {text:'«اِصْنَعُوا ثَمَرًا يَلِيقُ بِالتَّوْبَةِ»', ref:'(مت ٣: ٨)'},
+  /* ١٨ */
+  {text:'«لأَنَّ ثَمَرَ النُّورِ هُوَ فِي كُلِّ صَلاَحٍ وَبِرٍّ وَحَقٍّ»', ref:'(أف ٥: ٩)'},
+  /* ١٩ */
+  {text:'«وَأَنَا أَطْلُبُ مِنَ الآبِ فَيُعْطِيكُمْ مُعَزِّيًا آخَرَ لِيَمْكُثَ مَعَكُمْ إِلَى الأَبَدِ، رُوحَ الْحَقِّ»', ref:'(يو ١٤: ١٦-١٧)'},
+  /* ٢٠ */
+  {text:'«وَأَمَّا الْمُعَزِّي الرُّوحُ الْقُدُسُ الَّذِي سَيُرْسِلُهُ الآبُ بِاسْمِي فَهُوَ يُعَلِّمُكُمْ كُلَّ شَيْءٍ وَيُذَكِّرُكُمْ بِكُلِّ مَا قُلْتُهُ لَكُمْ»', ref:'(يو ١٤: ٢٦)'},
+  /* ٢١ */
+  {text:'«وَمَتَى جَاءَ ذَاكَ رُوحُ الْحَقِّ فَهُوَ يُرْشِدُكُمْ إِلَى جَمِيعِ الْحَقِّ»', ref:'(يو ١٦: ١٣)'},
+  /* ٢٢ */
+  {text:'«وَمَتَى جَاءَ الْمُعَزِّي الَّذِي سَأُرْسِلُهُ أَنَا إِلَيْكُمْ مِنَ الآبِ، رُوحُ الْحَقِّ الَّذِي مِنَ الآبِ يَنْبَثِقُ، فَهُوَ يَشْهَدُ لِي»', ref:'(يو ١٥: ٢٦)'},
+  /* ٢٣ */
+  {text:'«الرُّوحُ وَحْدَهُ يُحْيِي. الْجَسَدُ لاَ يُفِيدُ شَيْئًا»', ref:'(يو ٦: ٦٣)'},
+  /* ٢٤ */
+  {text:'«أَمَا تَعْلَمُونَ أَنَّكُمْ هَيْكَلُ اللهِ وَرُوحُ اللهِ يَسْكُنُ فِيكُمْ؟»', ref:'(١كو ٣: ١٦)'},
+  /* ٢٥ */
+  {text:'«إِنْ كُنَّا نَعِيشُ بِالرُّوحِ، فَلْنَسْلُكْ أَيْضًا بِالرُّوحِ»', ref:'(غل ٥: ٢٥)'},
+  /* ٢٦ */
+  {text:'«وَصِيَّةً جَدِيدَةً أَنَا أُعْطِيكُمْ: أَنْ تُحِبُّوا بَعْضُكُمْ بَعْضًا. كَمَا أَحْبَبْتُكُمْ أَحِبُّوا أَنْتُمْ أَيْضًا بَعْضُكُمْ بَعْضًا»', ref:'(يو ١٣: ٣٤)'},
+  /* ٢٧ */
+  {text:'«بِهَذَا يَعْرِفُ الْجَمِيعُ أَنَّكُمْ تَلاَمِيذِي: إِنْ كَانَ لَكُمْ حُبٌّ بَعْضُكُمْ لِبَعْضٍ»', ref:'(يو ١٣: ٣٥)'},
+  /* ٢٨ */
+  {text:'«نَحْنُ نُحِبُّهُ لأَنَّهُ هُوَ أَحَبَّنَا أَوَّلاً»', ref:'(١يو ٤: ١٩)'},
+  /* ٢٩ */
+  {text:'«اِفْرَحُوا فِي الرَّبِّ كُلَّ حِينٍ، وَأَقُولُ أَيْضًا: افْرَحُوا»', ref:'(في ٤: ٤)'},
+  /* ٣٠ */
+  {text:'«هَذَا كَلَّمْتُكُمْ بِهِ لِيَثْبُتَ فَرَحِي فِيكُمْ وَيَكْمُلَ فَرَحُكُمْ»', ref:'(يو ١٥: ١١)'},
+  /* ٣١ */
+  {text:'«فَرَحُوا دَائِمًا، صَلُّوا بِلاَ انْقِطَاعٍ، اشْكُرُوا فِي كُلِّ شَيْءٍ»', ref:'(١تس ٥: ١٦-١٨)'},
+  /* ٣٢ */
+  {text:'«سَلاَمِي أُعْطِيكُمْ. لاَ كَمَا يُعْطِي الْعَالَمُ أُعْطِيكُمْ أَنَا. لاَ تَضْطَرِبْ قُلُوبُكُمْ وَلاَ تَخَفْ»', ref:'(يو ١٤: ٢٧)'},
+  /* ٣٣ */
+  {text:'«وَسَلاَمُ اللهِ الَّذِي يَفُوقُ كُلَّ عَقْلٍ يَحْفَظُ قُلُوبَكُمْ وَأَفْكَارَكُمْ فِي الْمَسِيحِ يَسُوعَ»', ref:'(في ٤: ٧)'},
+  /* ٣٤ */
+  {text:'«مُتَحَمِّلِينَ بَعْضُكُمْ بَعْضًا بِالْمَحَبَّةِ، مُجْتَهِدِينَ فِي حِفْظِ وَحْدَةِ الرُّوحِ بِرِبَاطِ السَّلاَمِ»', ref:'(أف ٤: ٢-٣)'},
+  /* ٣٥ */
+  {text:'«كُونُوا لُطَفَاءَ بَعْضُكُمْ نَحْوَ بَعْضٍ، شَفُوقِينَ، مُتَسَامِحِينَ»', ref:'(أف ٤: ٣٢)'},
+  /* ٣٦ */
+  {text:'«اِلْبَسُوا كَمَا يَلِيقُ بِمُخْتَارِي اللهِ رَحْمَةً وَلُطْفًا وَتَوَاضُعًا وَوَدَاعَةً وَطُولَ أَنَاةٍ»', ref:'(كو ٣: ١٢)'},
+  /* ٣٧ */
+  {text:'«تَعَلَّمُوا مِنِّي لأَنِّي وَدِيعٌ وَمُتَوَاضِعُ الْقَلْبِ، فَتَجِدُوا رَاحَةً لِنُفُوسِكُمْ»', ref:'(مت ١١: ٢٩)'},
+  /* ٣٨ */
+  {text:'«طُوبَى لِلْوُدَعَاءِ لأَنَّهُمْ يَرِثُونَ الأَرْضَ»', ref:'(مت ٥: ٥)'},
+  /* ٣٩ */
+  {text:'«طُوبَى لِلأَنْقِيَاءِ الْقَلْبِ لأَنَّهُمْ يَعَايِنُونَ اللهَ»', ref:'(مت ٥: ٨)'},
+  /* ٤٠ */
+  {text:'«طُوبَى لِصَانِعِي السَّلاَمِ لأَنَّهُمْ أَبْنَاءُ اللهِ يُدْعَوْنَ»', ref:'(مت ٥: ٩)'},
+  /* ٤١ */
+  {text:'«اِعْمَلُوا الصَّالِحَ لِجَمِيعِ النَّاسِ، وَبِالأَخَصِّ لأَهْلِ الْبَيْتِ الَّذِينَ هُمْ مِنَ الإِيمَانِ»', ref:'(غل ٦: ١٠)'},
+  /* ٤٢ */
+  {text:'«وَكَذَلِكَ الرُّوحُ أَيْضًا يُعِينُ ضُعَفَاءَنَا. إِذْ لَسْنَا نَعْلَمُ مَا نَطْلُبُ كَمَا يَنْبَغِي، لَكِنَّ الرُّوحَ ذَاتَهُ يَشْفَعُ عَنَّا بِأَنَّاتٍ لاَ يُنْطَقُ بِهَا»', ref:'(رو ٨: ٢٦)'},
+  /* ٤٣ */
+  {text:'«لأَنَّ اللهَ لَمْ يُعْطِنَا رُوحَ الْخَوْفِ، بَلْ رُوحَ الْقُوَّةِ وَالْمَحَبَّةِ وَالتَّعَقُّلِ»', ref:'(٢تي ١: ٧)'},
+  /* ٤٤ */
+  {text:'«اَلرَّبُّ هُوَ الرُّوحُ، وَحَيْثُ رُوحُ الرَّبِّ ثَمَّةَ حُرِّيَّةٌ»', ref:'(٢كو ٣: ١٧)'},
+  /* ٤٥ */
+  {text:'«اُطْلُبُوا وَسَيُعْطَى لَكُمْ، اِبْحَثُوا وَسَتَجِدُونَ، اِقْرَعُوا وَسَيُفْتَحُ لَكُمْ»', ref:'(مت ٧: ٧)'},
+  /* ٤٦ */
+  {text:'«اِسْهَرُوا وَصَلُّوا لِئَلاَّ تَدْخُلُوا فِي تَجْرِبَةٍ. أَمَّا الرُّوحُ فَنَشِيطٌ وَأَمَّا الْجَسَدُ فَضَعِيفٌ»', ref:'(مت ٢٦: ٤١)'},
+  /* ٤٧ */
+  {text:'«قَلْبًا نَقِيًّا اخْلُقْ فِيَّ يَا اللهُ، وَرُوحًا مُسْتَقِيمًا جَدِّدْ فِي دَاخِلِي»', ref:'(مز ٥١: ١٠)'},
+  /* ٤٨ */
+  {text:'«لاَ تَطْرَحْنِي مِنْ أَمَامِكَ، وَرُوحَكَ الْقُدُّوسَ لاَ تَنْزِعْهُ مِنِّي»', ref:'(مز ٥١: ١١)'},
+  /* ٤٩ */
+  {text:'«أَعِدْ إِلَيَّ بَهْجَةَ خَلاَصِكَ، وَبِرُوحٍ مُسْتَعِدٍّ أَعْضُدْنِي»', ref:'(مز ٥١: ١٢)'},
+  /* ٥٠ */
+  {text:'«اثْبُتُوا فِيَّ وَأَنَا فِيكُمْ. كَمَا أَنَّ الْغُصْنَ لاَ يَقْدِرُ أَنْ يَأْتِيَ بِثَمَرٍ مِنْ ذَاتِهِ إِنْ لَمْ يَثْبُتْ فِي الْكَرْمَةِ، كَذَلِكَ أَنْتُمْ أَيْضًا إِنْ لَمْ تَثْبُتُوا فِيَّ»', ref:'(يو ١٥: ٤)'},
+  /* ٥١ */
+  {text:'«بِالرُّوحِ الْقُدُسِ السَّاكِنِ فِينَا، احْفَظِ الْوَدِيعَةَ الْحَسَنَةَ»', ref:'(٢تي ١: ١٤)'},
+  /* ٥٢ */
+  {text:'«اَللهُ هُوَ الَّذِي يَعْمَلُ فِيكُمْ أَنْ تُرِيدُوا وَأَنْ تَعْمَلُوا مِنْ أَجْلِ مَسَرَّتِهِ»', ref:'(في ٢: ١٣)'},
+];
+
+function getWeekVerse(weekStartDate){
+  /* بيحسب رقم الأسبوع من بداية البرنامج (أغسطس 2026) ويختار الآية المناسبة */
+  var msPerWeek = 7 * 24 * 60 * 60 * 1000;
+  var weekIndex = Math.floor((weekStartDate - PROGRAM_START) / msPerWeek);
+  if(weekIndex < 0) weekIndex = 0;
+  var verse = WEEKLY_VERSES[weekIndex % WEEKLY_VERSES.length];
+  return '💬 آية الأسبوع: ' + verse.text + ' ' + verse.ref;
+}
+
+function updateWeekVerse(){
+  var el = document.getElementById('weekVerse');
+  if(el) el.textContent = getWeekVerse(currentWeekStart);
+}
 
 var Store = {
   async get(key) {
@@ -467,7 +556,6 @@ var Store = {
       if(val === null) return null;
       return typeof val === 'string' ? val : JSON.stringify(val);
     } catch(e) {
-      // fallback localStorage
       try { var v = localStorage.getItem('bustani_'+key); if(v!=null) return v; } catch(e2){}
       return null;
     }
@@ -484,7 +572,6 @@ var Store = {
     } catch(e) {
       console.warn('Firebase set failed, using localStorage', e);
     }
-    // always save localStorage as backup
     try { localStorage.setItem('bustani_'+key, value); } catch(e){}
     return true;
   },
@@ -497,7 +584,6 @@ var Store = {
       var safePrefix = prefix.replace(/[.#$/\[\]]/g, '_');
       return Object.keys(data).filter(function(k){ return k.indexOf(safePrefix) === 0; });
     } catch(e) {
-      // fallback localStorage
       var keys = [];
       try {
         for(var i=0;i<localStorage.length;i++){
@@ -510,16 +596,13 @@ var Store = {
   }
 };
 
-/* ═══════════════ CONFIG ═══════════════ */
-var SECRET_CODE = 'bollykarbos';
+var SECRET_CODE = 'nota';
 var DASH_CODE   = '55555';
 var childName   = '';
 
-/* Arabic numerals */
 var AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 function toAr(n){ return String(n).split('').map(function(c){ return AR[+c]||c; }).join(''); }
 
-/* Safe storage key */
 function safeKey(name){ return name.trim().replace(/[\s\/\\'"+<>=;,!@#$%^&*()\[\]{}|?]+/g,'_').toLowerCase(); }
 
 function escapeHtml(s){
@@ -528,47 +611,78 @@ function escapeHtml(s){
   });
 }
 
-/* ═══════════════ TASKS & WEEKS ═══════════════ */
 var DAILY_TASKS = [
-  {emoji:'💧', name:'مياه الصلاة والتسبيح',       desc:'صلّيت وقلت يا الله وشكرت ربنا السيد'},
-  {emoji:'☀️', name:'شمس كلمة الإنجيل',            desc:'قرأت آية وعشت كلمة ربنا وقلبي'},
+  {emoji:'💧', name:'مياه الصلاة والتسبيح',       desc:'صلّيت وشكرت ربنا'},
+  {emoji:'☀️', name:'شمس كلمة الإنجيل',            desc:'قرأت آية وعشت كلمة ربنا '},
   {emoji:'❤️', name:'سماد المحبة وثمار اليوم',     desc:'ساعدت في البيت وأبهجت أحد اليوم'},
-  {emoji:'🌬️', name:'رياح التواضع والمرونة',       desc:'سامحت أو قلت آسف لأحد أعزاء'},
+  {emoji:'🌬️', name:'رياح التواضع والمرونة',       desc:'سامحت أو قلت آسف لأحد الاصدقاء'},
 ];
 var WEEKLY_TASKS = [
-  {emoji:'✂️', name:'مقص التوبة والاعتراف', desc:'اعترفت وأزلت الأشواك الخاطئة'},
-  {emoji:'📖', name:'جذور التناول المقدس',  desc:'تناولت جسد الرب وتغذيت من أمه'},
+  {emoji:'✂️', name:'مقص التوبة والاعتراف', desc:'اعترفت وأزلت الأشواك '},
+  {emoji:'📖', name:'جذور التناول المقدس',  desc:'تناولت جسد الرب ودمة'},
 ];
 var DAYS_PER_WEEK = 7;
 var DAY_NAMES = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-var MAX_WEEK_SCORE = DAILY_TASKS.length * DAYS_PER_WEEK + WEEKLY_TASKS.length; // 30
-var TOTAL_WEEKS = 4;
+var DAY_NAMES_SHORT = ['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+var MONTH_NAMES = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+var MAX_WEEK_SCORE = DAILY_TASKS.length * DAYS_PER_WEEK + WEEKLY_TASKS.length;
 
-var WEEK_EMOJIS = ['🌰','🌿','🌼','🌹'];
-var STAGE_TAGS  = ['🌱 البذرة نايمة في التربة','🌿 طلعت برعمة!','🌱 الزرعة بدأت تنمو','🌱 الزرعة اتقوت','🌳 الزرعة بقت كبيرة!','🌼 بدأت تطلع براعم','🌸 طلع ورد!','🌹 الوردة الحمرا اكتملت!'];
-var POT_LABELS  = ['البذرة نايمة 🌰','برعمة صغيرة 🌿','زرعة صغيرة 🌱','زرعة تنمو 🌱','زرعة كبيرة 🌳','براعم ظهرت 🌼','زهرة جميلة 🌸','وردة حمرا 🌹'];
+var WEEK_EMOJIS = ['🌰','🌿','🌼','🌹','🌱','🌳','🌸','🍃'];
+var STAGE_TAGS  = ['🌱 البذرة نايمة في التربة','🌿 طلعت برعمة!','🌱 الزرعة بدأت تنمو','🌱 الزرعة اتقوت','🌳 الزرعة بقت كبيرة!','🌼 بدأت تطلع براعم','🌸 طلع ثمر','🌹 الزرعة اكتملت و طلع ثمر'];
+var POT_LABELS  = ['البذرة نايمة 🌰','برعمة صغيرة 🌿','زرعة صغيرة 🌱','زرعة تنمو 🌱','زرعة كبيرة 🌳','براعم ظهرت 🌼','زهرة جميلة 🌸','ثمر جميل🌹'];
 
-/* State */
-var data = [];
-var currentWeek = 0;
-var currentDay  = 0;
+var PROGRAM_START = new Date(2026, 7, 2);
+var PROGRAM_END_MONTH = new Date(2032, 11, 1);
+var PROGRAM_END = new Date(2032, 11, 31);
 
-function freshWeek(){
-  var daily = [];
-  for(var d=0;d<DAYS_PER_WEEK;d++) daily.push([false,false,false,false]);
-  return { daily:daily, weekly:[false,false] };
+var weeksData = {};
+var viewMonth = new Date(PROGRAM_START.getFullYear(), PROGRAM_START.getMonth(), 1);
+var currentWeekStart = new Date(PROGRAM_START);
+var currentDayKey = dateKey(PROGRAM_START);
+
+function freshWeek(){ return { daily:{}, weekly:[false,false] }; }
+
+function ensureWeek(weekKey){
+  if(!weeksData[weekKey]) weeksData[weekKey] = freshWeek();
+  if(!weeksData[weekKey].daily) weeksData[weekKey].daily = {};
+  if(!Array.isArray(weeksData[weekKey].weekly)) weeksData[weekKey].weekly = [false,false];
+  return weeksData[weekKey];
 }
-function initData(){
-  data = [];
-  for(var i=0;i<TOTAL_WEEKS;i++) data.push(freshWeek());
+
+function ensureDay(weekKey, dayKey){
+  var wk = ensureWeek(weekKey);
+  if(!Array.isArray(wk.daily[dayKey])) wk.daily[dayKey] = [false,false,false,false];
+  return wk.daily[dayKey];
 }
 
-/* ═══════════════ PERSISTENCE ═══════════════ */
+function initData(){ weeksData = {}; }
+
+function pad2(n){ return n<10 ? '0'+n : ''+n; }
+function dateKey(d){ return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); }
+function parseDateKey(k){
+  var p = k.split('-');
+  return new Date(parseInt(p[0],10), parseInt(p[1],10)-1, parseInt(p[2],10));
+}
+function startOfWeek(d){
+  var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  nd.setDate(nd.getDate() - nd.getDay());
+  return nd;
+}
+function addDays(d, n){
+  var nd = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  nd.setDate(nd.getDate()+n);
+  return nd;
+}
+function addMonths(d, n){
+  return new Date(d.getFullYear(), d.getMonth()+n, 1);
+}
+function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+
 async function saveChildData(){
   var key = 'child:' + safeKey(childName);
   var payload = JSON.stringify({
     name: childName,
-    data: data,
+    weeks: weeksData,
     updatedAt: new Date().toISOString()
   });
   await Store.set(key, payload);
@@ -582,19 +696,14 @@ async function loadChildData(){
   if(!raw) return false;
   try {
     var parsed = JSON.parse(raw);
-    if(parsed && parsed.data && Array.isArray(parsed.data) && parsed.data.length === TOTAL_WEEKS){
-      // Validate structure of each week
-      var ok = true;
-      parsed.data.forEach(function(wk){
-        if(!wk || !Array.isArray(wk.daily) || !Array.isArray(wk.weekly)) ok = false;
-      });
-      if(ok){ data = parsed.data; return true; }
+    if(parsed && parsed.weeks && typeof parsed.weeks === 'object'){
+      weeksData = parsed.weeks;
+      return true;
     }
-  } catch(e){ /* corrupted — start fresh */ }
+  } catch(e){}
   return false;
 }
 
-/* ═══════════════ LOGIN ═══════════════ */
 function tryLogin(){
   var nameVal = document.getElementById('nameInput').value.trim();
   var codeVal = document.getElementById('codeInput').value.trim().toLowerCase();
@@ -611,9 +720,17 @@ function tryLogin(){
   }
 
   if(!nameVal){
-    err.textContent = '❌ اكتب اسمك الأول!';
+    err.textContent = '❌ اكتب اسمك الثلاثي!';
     document.getElementById('nameInput').focus();
     setTimeout(function(){ err.textContent=''; }, 2500);
+    return;
+  }
+
+  var nameParts = nameVal.trim().split(' ').filter(function(x){ return x.length > 0; });
+  if(nameParts.length < 3){
+    err.textContent = '❌ لازم تكتب اسمك ثلاثي (اسم + اسم الأب + اسم الجد)';
+    document.getElementById('nameInput').focus();
+    setTimeout(function(){ err.textContent=''; }, 3000);
     return;
   }
 
@@ -627,10 +744,12 @@ function tryLogin(){
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('appScreen').style.display  = 'block';
       document.getElementById('childNameLabel').textContent = childName;
-      goWeek(0);
+      var existingKeys = sortedWeekKeys(weeksData);
+      var openDate = existingKeys.length ? parseDateKey(existingKeys[existingKeys.length-1]) : new Date(PROGRAM_START);
+      viewMonth = new Date(openDate.getFullYear(), openDate.getMonth(), 1);
+      goToWeekContaining(openDate);
     }
 
-    // timeout: لو Firebase اتأخر أكتر من 5 ثواني افتح على طول
     var loginTimer = setTimeout(function(){ openApp(); }, 5000);
 
     loadChildData().then(function(found){
@@ -663,7 +782,6 @@ function backToLogin(){
 document.getElementById('codeInput').addEventListener('keydown', function(e){ if(e.key==='Enter') tryLogin(); });
 document.getElementById('nameInput').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('codeInput').focus(); });
 
-/* ═══════════════ UI HELPERS ═══════════════ */
 function thornSVG(){
   return '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">'
     +'<circle cx="14" cy="14" r="13" fill="#ffcdd2" stroke="#e57373" stroke-width="1.5"/>'
@@ -674,37 +792,67 @@ function thornSVG(){
 
 function weekScore(wd){
   var s = 0;
-  if(wd && wd.daily) wd.daily.forEach(function(day){ day.forEach(function(v){ if(v) s++; }); });
+  if(wd && wd.daily){
+    Object.keys(wd.daily).forEach(function(k){
+      (wd.daily[k]||[]).forEach(function(v){ if(v) s++; });
+    });
+  }
   if(wd && wd.weekly) wd.weekly.forEach(function(v){ if(v) s++; });
   return s;
 }
 
-/* ═══════════════ RENDER ═══════════════ */
+function weeksOfMonth(monthDate){
+  var year = monthDate.getFullYear();
+  var month = monthDate.getMonth();
+  var firstOfMonth = new Date(year, month, 1);
+  var lastOfMonth  = new Date(year, month+1, 0);
+  var weeks = [];
+  var cursor = startOfWeek(firstOfMonth);
+  while(cursor <= lastOfMonth){
+    weeks.push(new Date(cursor));
+    cursor = addDays(cursor, 7);
+  }
+  return weeks;
+}
+
 function renderStrip(){
   var s = document.getElementById('weekStrip');
   s.innerHTML = '';
-  for(var i=0;i<TOTAL_WEEKS;i++){
-    var score = weekScore(data[i]);
-    var cls = 'wdot' + (i===currentWeek?' active':'') + (score===MAX_WEEK_SCORE?' completed':'');
+  var weeks = weeksOfMonth(viewMonth).filter(function(wStart){
+    return wStart >= PROGRAM_START && wStart <= PROGRAM_END;
+  });
+  weeks.forEach(function(wStart, idx){
+    var wKey = dateKey(wStart);
+    var wd = ensureWeek(wKey);
+    var score = weekScore(wd);
+    var isActive = sameDay(wStart, currentWeekStart);
+    var cls = 'wdot' + (isActive?' active':'') + (score===MAX_WEEK_SCORE?' completed':'');
     var div = document.createElement('div');
     div.className = cls;
-    (function(x){ div.onclick = function(){ goWeek(x); }; })(i);
-    div.innerHTML = '<div class="wd-emoji">'+WEEK_EMOJIS[i]+'</div><div class="wd-lbl">أسبوع '+toAr(i+1)+'</div>';
+    div.onclick = (function(ws){ return function(){ goToWeekStart(ws); }; })(wStart);
+    var wEnd = addDays(wStart,6);
+    var emoji = WEEK_EMOJIS[idx % WEEK_EMOJIS.length];
+    div.innerHTML = '<div class="wd-emoji">'+emoji+'</div><div class="wd-lbl">'+toAr(wStart.getDate())+'-'+toAr(wEnd.getDate())+'</div>';
     s.appendChild(div);
-  }
+  });
 }
 
 function renderDayStrip(){
   var s = document.getElementById('dayStrip');
   s.innerHTML = '';
-  var wd = data[currentWeek];
   for(var d=0;d<DAYS_PER_WEEK;d++){
-    var full = wd.daily[d].filter(Boolean).length === DAILY_TASKS.length;
-    var cls = 'day-pill' + (d===currentDay?' active':'') + (full?' full':'');
+    var dayDate = addDays(currentWeekStart, d);
+    var dKey = dateKey(dayDate);
+    var dayArr = ensureDay(dateKey(currentWeekStart), dKey);
+    var full = dayArr.filter(Boolean).length === DAILY_TASKS.length;
+    var isToday = sameDay(dayDate, new Date());
+    var isActive = (dKey === currentDayKey);
+    var cls = 'day-pill' + (isActive?' active':'') + (full?' full':'');
     var div = document.createElement('div');
     div.className = cls;
-    div.textContent = DAY_NAMES[d];
-    (function(x){ div.onclick = function(){ currentDay=x; renderDayStrip(); renderDailyTasks(); }; })(d);
+    div.innerHTML = DAY_NAMES_SHORT[d] + '<br/>' + toAr(dayDate.getDate()) + (isToday?' •':'');
+    div.title = DAY_NAMES[d] + ' ' + dayDate.getDate() + ' ' + MONTH_NAMES[dayDate.getMonth()];
+    div.onclick = (function(k){ return function(){ currentDayKey=k; renderDayStrip(); renderDailyTasks(); }; })(dKey);
     s.appendChild(div);
   }
 }
@@ -712,7 +860,7 @@ function renderDayStrip(){
 function renderDailyTasks(){
   var grid = document.getElementById('dailyGrid');
   grid.innerHTML = '';
-  var dayDone = data[currentWeek].daily[currentDay];
+  var dayDone = ensureDay(dateKey(currentWeekStart), currentDayKey);
   for(var i=0;i<DAILY_TASKS.length;i++){
     var t = DAILY_TASKS[i];
     var done = dayDone[i];
@@ -731,7 +879,7 @@ function renderDailyTasks(){
 function renderWeeklyTasks(){
   var grid = document.getElementById('weeklyGrid');
   grid.innerHTML = '';
-  var wd = data[currentWeek];
+  var wd = ensureWeek(dateKey(currentWeekStart));
   for(var i=0;i<WEEKLY_TASKS.length;i++){
     var t = WEEKLY_TASKS[i];
     var done = wd.weekly[i];
@@ -749,8 +897,9 @@ function renderWeeklyTasks(){
 
 function onDailyTaskClick(){
   var idx = parseInt(this.getAttribute('data-idx'));
-  if(data[currentWeek].daily[currentDay][idx]) return;
-  data[currentWeek].daily[currentDay][idx] = true;
+  var dayArr = ensureDay(dateKey(currentWeekStart), currentDayKey);
+  if(dayArr[idx]) return;
+  dayArr[idx] = true;
   var th = document.getElementById('dthorn'+idx);
   if(th) th.classList.add('removed');
   this.classList.add('done');
@@ -760,8 +909,9 @@ function onDailyTaskClick(){
 
 function onWeeklyTaskClick(){
   var idx = parseInt(this.getAttribute('data-idx'));
-  if(data[currentWeek].weekly[idx]) return;
-  data[currentWeek].weekly[idx] = true;
+  var wd = ensureWeek(dateKey(currentWeekStart));
+  if(wd.weekly[idx]) return;
+  wd.weekly[idx] = true;
   var th = document.getElementById('wthorn'+idx);
   if(th) th.classList.add('removed');
   this.classList.add('done');
@@ -772,9 +922,9 @@ function onWeeklyTaskClick(){
 function afterTaskCheck(){
   updateUI();
   renderDayStrip();
-  var score = weekScore(data[currentWeek]);
+  var score = weekScore(ensureWeek(dateKey(currentWeekStart)));
   drawPlant(score);
-  saveChildData(); // fire-and-forget, no await needed here
+  saveChildData();
   if(score === MAX_WEEK_SCORE){
     setTimeout(function(){
       document.getElementById('weekBanner').classList.add('show');
@@ -784,7 +934,7 @@ function afterTaskCheck(){
 }
 
 function updateUI(){
-  var score = weekScore(data[currentWeek]);
+  var score = weekScore(ensureWeek(dateKey(currentWeekStart)));
   document.getElementById('progFill').style.width = (score/MAX_WEEK_SCORE*100)+'%';
   document.getElementById('progNum').textContent   = toAr(score)+'/'+toAr(MAX_WEEK_SCORE);
   document.getElementById('scoreBadge').textContent = 'النقاط: '+toAr(score)+'/'+toAr(MAX_WEEK_SCORE);
@@ -809,10 +959,23 @@ function drawPlant(score){
   document.getElementById('potLabel').textContent   = POT_LABELS[idx];
 }
 
-function goWeek(w){
-  if(w<0||w>=TOTAL_WEEKS) return;
-  currentWeek = w;
-  currentDay  = 0;
+function goToWeekStart(wStart){
+  var clamped = new Date(wStart);
+  if(clamped < PROGRAM_START) clamped = new Date(PROGRAM_START);
+  if(clamped > PROGRAM_END) clamped = startOfWeek(PROGRAM_END);
+  currentWeekStart = clamped;
+  currentDayKey = dateKey(currentWeekStart);
+  if(currentWeekStart.getMonth()!==viewMonth.getMonth() || currentWeekStart.getFullYear()!==viewMonth.getFullYear()){
+    viewMonth = new Date(currentWeekStart.getFullYear(), currentWeekStart.getMonth(), 1);
+  }
+  refreshAppScreen();
+}
+
+function goToWeekContaining(dateObj){
+  goToWeekStart(startOfWeek(dateObj));
+}
+
+function refreshAppScreen(){
   document.getElementById('weekBanner').classList.remove('show');
   renderStrip();
   renderDayStrip();
@@ -820,23 +983,41 @@ function goWeek(w){
   renderWeeklyTasks();
   updateUI();
 
-  document.getElementById('weekLabel').textContent = 'الأسبوع '+toAr(w+1);
-  document.getElementById('weekDates').textContent = '';
-  document.getElementById('dateRow').textContent   = '';
-  document.getElementById('prevBtn').disabled = (w===0);
-  document.getElementById('nextBtn').disabled = (w===TOTAL_WEEKS-1);
+  var wEnd = addDays(currentWeekStart,6);
+  document.getElementById('weekLabel').textContent = MONTH_NAMES[viewMonth.getMonth()]+' '+toAr(viewMonth.getFullYear());
+  document.getElementById('weekDates').textContent =
+    'أسبوع '+toAr(currentWeekStart.getDate())+' '+MONTH_NAMES[currentWeekStart.getMonth()].slice(0,3)
+    +' — '+toAr(wEnd.getDate())+' '+MONTH_NAMES[wEnd.getMonth()].slice(0,3);
+  document.getElementById('dateRow').textContent = '';
+  document.getElementById('prevBtn').disabled = (viewMonth.getFullYear()===PROGRAM_START.getFullYear() && viewMonth.getMonth()===PROGRAM_START.getMonth());
+  document.getElementById('nextBtn').disabled = (viewMonth.getFullYear()===PROGRAM_END_MONTH.getFullYear() && viewMonth.getMonth()===PROGRAM_END_MONTH.getMonth());
 
-  if(weekScore(data[currentWeek])===MAX_WEEK_SCORE){
+  if(weekScore(ensureWeek(dateKey(currentWeekStart)))===MAX_WEEK_SCORE){
     document.getElementById('weekBanner').classList.add('show');
   }
+  updateWeekVerse();
 }
 
-function changeWeek(dir){ goWeek(currentWeek-dir); }
+function changeMonth(dir){
+  var newMonth = addMonths(viewMonth, dir);
+  if(newMonth < new Date(PROGRAM_START.getFullYear(), PROGRAM_START.getMonth(), 1)) return;
+  if(newMonth > PROGRAM_END_MONTH) return;
+  viewMonth = newMonth;
+  var firstWeekOfNewMonth = weeksOfMonth(viewMonth)[0];
+  currentWeekStart = (firstWeekOfNewMonth < PROGRAM_START) ? new Date(PROGRAM_START) : firstWeekOfNewMonth;
+  currentDayKey = dateKey(currentWeekStart);
+  refreshAppScreen();
+}
+
+function changeWeek(dir){
+  goToWeekStart(addDays(currentWeekStart, dir*7));
+}
 
 /* ═══════════════ SERVANT DASHBOARD ═══════════════ */
 var dashChildren = [];
 var dashSort     = 'top';
 var dashExpanded = {};
+var dashExpandedMonths = {};
 
 async function loadDashboard(){
   var content    = document.getElementById('dashContent');
@@ -853,20 +1034,18 @@ async function loadDashboard(){
         if(!raw) continue;
         var parsed = JSON.parse(raw);
         if(parsed && parsed.name){
-          // Ensure data has TOTAL_WEEKS weeks with proper structure
-          if(!parsed.data || !Array.isArray(parsed.data) || parsed.data.length !== TOTAL_WEEKS){
-            parsed.data = [];
-            for(var w=0;w<TOTAL_WEEKS;w++) parsed.data.push(freshWeek());
-          }
-          // Repair each week if needed
-          for(var w=0;w<TOTAL_WEEKS;w++){
-            if(!parsed.data[w] || !Array.isArray(parsed.data[w].daily) || !Array.isArray(parsed.data[w].weekly)){
-              parsed.data[w] = freshWeek();
-            }
-          }
+          if(!parsed.weeks || typeof parsed.weeks !== 'object') parsed.weeks = {};
+          var filteredWeeks = {};
+          Object.keys(parsed.weeks).forEach(function(wk){
+            try{
+              var wDate = parseDateKey(wk);
+              if(wDate >= PROGRAM_START && wDate <= PROGRAM_END) filteredWeeks[wk] = parsed.weeks[wk];
+            }catch(e){}
+          });
+          parsed.weeks = filteredWeeks;
           children.push(parsed);
         }
-      }catch(e){ /* skip */ }
+      }catch(e){}
     }
   }catch(e){
     refreshBtn.classList.remove('spin');
@@ -881,45 +1060,70 @@ async function loadDashboard(){
 
 function setSort(mode){
   dashSort = mode;
-  ['top','name','need'].forEach(function(m){
-    document.getElementById('sort'+m.charAt(0).toUpperCase()+m.slice(1)+'Btn')
-      .classList.toggle('active', m===mode);
-  });
-  // Fix button IDs
   document.getElementById('sortTopBtn').classList.toggle('active',  mode==='top');
   document.getElementById('sortNameBtn').classList.toggle('active', mode==='name');
   document.getElementById('sortNeedBtn').classList.toggle('active', mode==='need');
   renderDashboard();
 }
 
+function sortedWeekKeys(weeksObj){
+  return Object.keys(weeksObj||{}).sort(function(a,b){
+    return parseDateKey(a) - parseDateKey(b);
+  });
+}
+
 function childTotal(c){
-  return (c.data||[]).reduce(function(s,wk){ return s+weekScore(wk); }, 0);
+  var weeks = c.weeks||{};
+  return Object.keys(weeks).reduce(function(s,k){ return s+weekScore(weeks[k]); }, 0);
+}
+
+function childLastWeekScore(c){
+  var keys = sortedWeekKeys(c.weeks||{});
+  if(!keys.length) return 0;
+  var lastKey = keys[keys.length-1];
+  return weekScore(c.weeks[lastKey]);
+}
+
+function childCompletedWeeksCount(c){
+  var weeks = c.weeks||{};
+  return Object.keys(weeks).filter(function(k){ return weekScore(weeks[k])===MAX_WEEK_SCORE; }).length;
+}
+
+function groupWeeksByMonth(weekKeys){
+  var groups = {};
+  weekKeys.forEach(function(wk){
+    var d = parseDateKey(wk);
+    var mKey = d.getFullYear()+'-'+pad2(d.getMonth()+1);
+    if(!groups[mKey]) groups[mKey] = [];
+    groups[mKey].push(wk);
+  });
+  var monthKeys = Object.keys(groups).sort().reverse();
+  return monthKeys.map(function(mKey){
+    return { monthKey: mKey, weekKeys: groups[mKey].slice().sort().reverse() };
+  });
 }
 
 function renderDashboard(){
   var content  = document.getElementById('dashContent');
   var children = dashChildren.slice();
 
-  /* Stats (always full dataset) */
   var totalChildren = children.length;
-  var activeCount=0, fullCount=0, totalPoints=0;
+  var activeCount=0, fullCount=0, lastWeekPoints=0;
   children.forEach(function(c){
-    var scores = (c.data||[]).map(weekScore);
-    if(scores.some(function(s){ return s>0; })) activeCount++;
-    if(scores.length===TOTAL_WEEKS && scores.every(function(s){ return s===MAX_WEEK_SCORE; })) fullCount++;
-    totalPoints += scores.reduce(function(s,v){ return s+v; },0);
+    if(childTotal(c) > 0) activeCount++;
+    if(childCompletedWeeksCount(c) > 0) fullCount++;
+    lastWeekPoints += childLastWeekScore(c);
   });
   document.getElementById('statTotal').textContent  = toAr(totalChildren);
   document.getElementById('statActive').textContent = toAr(activeCount);
   document.getElementById('statFull').textContent   = toAr(fullCount);
-  document.getElementById('statAvg').textContent    = totalChildren ? toAr(Math.round((totalPoints/totalChildren)*10)/10) : '٠';
+  document.getElementById('statAvg').textContent    = totalChildren ? toAr(Math.round((lastWeekPoints/totalChildren)*10)/10) : '٠';
 
   if(totalChildren===0){
     content.innerHTML='<div class="dash-empty"><span class="eemoji">🌱</span>لسه مفيش أطفال سجلوا في النوتة<br/>هيظهروا هنا أول ما يدخلوا بأسمائهم.</div>';
     return;
   }
 
-  /* Search filter */
   var query = (document.getElementById('dashSearch').value||'').trim().toLowerCase();
   if(query) children = children.filter(function(c){ return c.name.toLowerCase().indexOf(query)!==-1; });
 
@@ -928,18 +1132,17 @@ function renderDashboard(){
     return;
   }
 
-  /* Sort */
   if(dashSort==='top')  children.sort(function(a,b){ return childTotal(b)-childTotal(a); });
   else if(dashSort==='name') children.sort(function(a,b){ return a.name.localeCompare(b.name,'ar'); });
   else children.sort(function(a,b){ return childTotal(a)-childTotal(b); });
 
   var html='<div class="dash-list">';
-  var maxTotal = TOTAL_WEEKS * MAX_WEEK_SCORE;
 
   children.forEach(function(c){
     var key    = safeKey(c.name);
-    var scores = (c.data||[]).map(weekScore);
-    var total  = scores.reduce(function(s,v){return s+v;},0);
+    var weekKeys = sortedWeekKeys(c.weeks||{});
+    var total  = childTotal(c);
+    var maxTotal = weekKeys.length * MAX_WEEK_SCORE;
     var initial= c.name.trim().charAt(0)||'🌱';
     var isExp  = !!dashExpanded[key];
 
@@ -947,8 +1150,7 @@ function renderDashboard(){
     if(c.updatedAt){
       try{
         var d=new Date(c.updatedAt);
-        var months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-        updatedTxt='آخر نشاط: '+d.getDate()+' '+months[d.getMonth()];
+        updatedTxt='آخر نشاط: '+d.getDate()+' '+MONTH_NAMES[d.getMonth()];
       }catch(e){}
     }
 
@@ -959,17 +1161,10 @@ function renderDashboard(){
     html+='<div class="child-name">'+escapeHtml(c.name)+'</div>';
     html+='<div class="child-sub">'+(updatedTxt||'لسه ملحقش يبدأ مهام')+'</div>';
     html+='</div>';
-    html+='<div class="child-weeks-mini">';
-    for(var w=0;w<TOTAL_WEEKS;w++){
-      var sc=scores[w]||0;
-      var mcls=sc===MAX_WEEK_SCORE?'full':(sc>0?'partial':'zero');
-      html+='<div class="wmini '+mcls+'">'+toAr(w+1)+'</div>';
-    }
-    html+='</div>';
-    html+='<div class="child-total-badge">'+toAr(total)+'/'+toAr(maxTotal)+'</div>';
+    html+='<div class="child-total-badge">'+toAr(total)+'/'+toAr(maxTotal||MAX_WEEK_SCORE)+'</div>';
     html+='<div class="chev">▾</div>';
     html+='<button class="delete-btn" onclick="event.stopPropagation();confirmDelete(\'' + key + '\')">🗑️</button>';
-    html+='</div>'; /* child-head */
+    html+='</div>';
 
     html+='<div class="confirm-delete" id="confirm-'+key+'">';
     html+='<p>⚠️ هتمسح '+escapeHtml(c.name)+' نهائياً؟</p>';
@@ -978,27 +1173,55 @@ function renderDashboard(){
     html+='<button class="confirm-no" onclick="cancelDelete(\'' + key + '\')">لأ</button>';
     html+='</div></div>';
     html+='<div class="child-detail">';
-    for(var w2=0;w2<TOTAL_WEEKS;w2++){
-      var wd=(c.data&&c.data[w2])?c.data[w2]:freshWeek();
-      var wscore=weekScore(wd);
-      html+='<div class="detail-week-block">';
-      html+='<div class="detail-week-title"><span>أسبوع '+toAr(w2+1)+' '+WEEK_EMOJIS[w2]+'</span><span class="dwscore">'+toAr(wscore)+'/'+toAr(MAX_WEEK_SCORE)+'</span></div>';
-      html+='<div class="detail-tasks">';
-      for(var wt=0;wt<WEEKLY_TASKS.length;wt++){
-        var wdone=!!(wd.weekly&&wd.weekly[wt]);
-        html+='<span class="dtask '+(wdone?'done':'miss')+'">'+(wdone?'✓':'•')+' '+escapeHtml(WEEKLY_TASKS[wt].name)+'</span>';
-      }
-      html+='</div>';
-      html+='<div class="detail-tasks" style="margin-top:6px;">';
-      for(var dd=0;dd<DAYS_PER_WEEK;dd++){
-        var dayArr=(wd.daily&&wd.daily[dd])?wd.daily[dd]:[false,false,false,false];
-        var dCount=dayArr.filter(Boolean).length;
-        var dCls=dCount===DAILY_TASKS.length?'done':(dCount>0?'':'miss');
-        html+='<span class="dtask '+dCls+'">'+DAY_NAMES[dd]+': '+toAr(dCount)+'/'+toAr(DAILY_TASKS.length)+'</span>';
-      }
-      html+='</div></div>';
+    if(weekKeys.length===0){
+      html+='<div style="font-size:12px;color:#999;text-align:center;padding:14px 0;">لسه مفيش أي أسبوع له بيانات</div>';
+    } else {
+      var monthGroups = groupWeeksByMonth(weekKeys);
+      var openMonths = dashExpandedMonths[key] || {};
+      monthGroups.forEach(function(grp){
+        var mParts = grp.monthKey.split('-');
+        var mYear = mParts[0], mMonthIdx = parseInt(mParts[1],10)-1;
+        var monthScore = grp.weekKeys.reduce(function(s,wk){ return s+weekScore(c.weeks[wk]); },0);
+        var monthMax = grp.weekKeys.length * MAX_WEEK_SCORE;
+        var isOpen = !!openMonths[grp.monthKey];
+        var monthRowId = 'mrow-'+key+'-'+grp.monthKey;
+
+        html+='<div class="month-row'+(isOpen?' open':'')+'" id="'+monthRowId+'">';
+        html+='<div class="month-row-head" onclick="toggleMonth(\''+key+'\',\''+grp.monthKey+'\')">';
+        html+='<span class="mr-name">'+MONTH_NAMES[mMonthIdx]+' '+toAr(mYear)+'</span>';
+        html+='<span class="mr-score">'+toAr(monthScore)+'/'+toAr(monthMax)+'</span>';
+        html+='<span class="mr-chev">▾</span>';
+        html+='</div>';
+        html+='<div class="month-row-body">';
+        grp.weekKeys.forEach(function(wk){
+          var wd = c.weeks[wk] || freshWeek();
+          var wscore = weekScore(wd);
+          var wStartDate = parseDateKey(wk);
+          var wEndDate = addDays(wStartDate,6);
+          html+='<div class="detail-week-block">';
+          html+='<div class="detail-week-title"><span>'+toAr(wStartDate.getDate())+' - '+toAr(wEndDate.getDate())+' '+MONTH_NAMES[wEndDate.getMonth()]+'</span><span class="dwscore">'+toAr(wscore)+'/'+toAr(MAX_WEEK_SCORE)+'</span></div>';
+          html+='<div class="detail-tasks">';
+          for(var wt=0;wt<WEEKLY_TASKS.length;wt++){
+            var wdone=!!(wd.weekly&&wd.weekly[wt]);
+            html+='<span class="dtask '+(wdone?'done':'miss')+'">'+(wdone?'✓':'•')+' '+escapeHtml(WEEKLY_TASKS[wt].name)+'</span>';
+          }
+          html+='</div>';
+          html+='<div class="detail-tasks" style="margin-top:6px;">';
+          for(var dd=0;dd<DAYS_PER_WEEK;dd++){
+            var dDate = addDays(wStartDate, dd);
+            var dKey2 = dateKey(dDate);
+            var dayArr=(wd.daily&&wd.daily[dKey2])?wd.daily[dKey2]:[false,false,false,false];
+            var dCount=dayArr.filter(Boolean).length;
+            var dCls=dCount===DAILY_TASKS.length?'done':(dCount>0?'':'miss');
+            html+='<span class="dtask '+dCls+'">'+DAY_NAMES[dd]+' '+toAr(dDate.getDate())+': '+toAr(dCount)+'/'+toAr(DAILY_TASKS.length)+'</span>';
+          }
+          html+='</div></div>';
+        });
+        html+='</div>';
+        html+='</div>';
+      });
     }
-    html+='</div></div>'; /* child-detail + child-card */
+    html+='</div></div>';
   });
   html+='</div>';
   content.innerHTML=html;
@@ -1008,6 +1231,13 @@ function toggleChild(key){
   dashExpanded[key]=!dashExpanded[key];
   var card=document.getElementById('card-'+key);
   if(card) card.classList.toggle('expanded', dashExpanded[key]);
+}
+
+function toggleMonth(childKey, monthKey){
+  if(!dashExpandedMonths[childKey]) dashExpandedMonths[childKey] = {};
+  dashExpandedMonths[childKey][monthKey] = !dashExpandedMonths[childKey][monthKey];
+  var row = document.getElementById('mrow-'+childKey+'-'+monthKey);
+  if(row) row.classList.toggle('open', !!dashExpandedMonths[childKey][monthKey]);
 }
 
 function confirmDelete(key){
@@ -1021,17 +1251,19 @@ function cancelDelete(key){
 }
 
 async function deleteChild(key){
-  // Delete from Firebase
   try{
     var safeK = key.replace(/[.#$\/\[\]]/g,'_');
     await fetch(FB_URL + safeK + '.json', {method:'DELETE'});
   }catch(e){}
-  // Delete from localStorage
   try{ localStorage.removeItem('bustani_child:'+key.replace('child_','')); }catch(e){}
-  // Remove from dashChildren array
   dashChildren = dashChildren.filter(function(c){ return safeKey(c.name) !== key; });
   renderDashboard();
 }
+
+/* ربط الزرار بعد تحميل الصفحة كاملاً */
+window.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('loginBtn').addEventListener('click', tryLogin);
+});
 </script>
 </body>
 </html>
